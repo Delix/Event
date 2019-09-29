@@ -1,0 +1,32 @@
+@import '~bootstrap/scss/bootstrap.scss';
+$primarycolor : pink;
+$accentcolor: white;
+$fontcolor: white;
+$fontShadow: black;
+
+.row
+{
+  background-color: $primarycolor;
+  height: 100%;
+h1
+{
+  font: outline;
+  font-weight: 500;
+  color: $fontcolor;
+  text-shadow: 2px 3px $fontShadow;
+}
+col
+{
+ 
+
+  text-align: center;
+ 
+ 
+  
+
+  
+}
+
+
+
+}
