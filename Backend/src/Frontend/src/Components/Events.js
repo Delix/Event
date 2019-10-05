@@ -1,22 +1,47 @@
-import React, { Component } from 'react'
+/*import React, { Component } from 'react'
 import './CSS/event_style.scss';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getevents }  from '../actions/division';
 
-export default class Events extends Component {
+
+export class Events extends Component {
+
+
+  static proptypes = {
+    event:PropTypes.array.isRequired 
+};  
+
+
+componentDidMount()
+{
+    this.props.getdiv();
+}
+
+
+
     render() {
         return (
             <div>
+             <div className = "Container">
+                    
+             </div>
+
+             { this.props.event.map( event =>(
+
               <div class="card">
                    
                    <div class="card-header">
-                     Featured
+                     { event.name }
                    </div>
                    <div className="card-body">
-                     <h5 className="card-title">Special title treatment</h5>
-                     <p class="card-text">With supporting text below as a natural lead-in to additional content0.</p>
+                     <h5 className="card-title">{ event.name }</h5>
+                     
+                     <p class="card-text">With supporting text belo.</p>
                  </div>
                    <ul className="list-group list-group-flush">
-                     <li className="list-group-item">Date</li>
-                     <li className="list-group-item">Location</li>
+                     <li className="list-group-item">{ event.date }</li>
+                     <li className="list-group-item">{event.location }</li>
                    </ul>
                    <div className = "carb-body">
                  
@@ -28,9 +53,15 @@ export default class Events extends Component {
                  
                  </div>
 
-
+)) }
                 
             </div>
         )
     }
 }
+
+const mapStateToProps = state => ({
+  divis: state.division.division
+});
+
+export default connect(mapStateToProps,{ getdiv })(Event);*/

@@ -1,7 +1,9 @@
-import { NEW_EVENT, GET_EVENTS } from '../actions/types.js';
+import { NEW_EVENT, GET_EVENTS,GET_AEVENTS } from '../actions/types.js';
 
 const initialState = {
-    events :[]
+    Events :[],
+    DivEvents:[],
+    Event :""
 }
 
 export default function(state = initialState,action ){
@@ -11,8 +13,24 @@ export default function(state = initialState,action ){
         case GET_EVENTS:  
         return {
           ...state,
-          events:action.payload
+          Events: action.payload
+          
         }
+
+        case GET_AEVENTS:
+            return {
+                ...state,
+                 DivEvents: state.Events.filter(event  =>{
+                  return event ?  event.division === action.id :event
+                })
+            }
+     /*  case GET_AEVENT:
+           
+       
+       
+      // map(event => event.id === action.id ? Event : event)
+
+*/
         case NEW_EVENT:
             return{
              state   

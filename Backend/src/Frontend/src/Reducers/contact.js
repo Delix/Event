@@ -1,22 +1,20 @@
-import { GET_DIVISIONS} from '../actions/types.js';
-
+import { GET_CONTACT } from '../actions/types.js';
 
 
 const initialState = {
-    divisions :[]
-
+    contact :[]
 }
 
 export default function(state = initialState,action ){
 
     switch(action.type)
     {
-        case GET_DIVISIONS:  
+        case GET_CONTACT:  
         return {
           ...state,
-          divisions:action.payload
+          contact:action.payload
         }
-  
+
         default:
             return {...state};
 

@@ -1,0 +1,14 @@
+.card {
+  width: 18rem;
+  margin: 20px;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.445), 0 6px 20px 0 rgba(0, 0, 0, 0.596);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.445), 0 6px 20px 0 rgba(0, 0, 0, 0.596);
+  text-align: center;
+  padding: 5px;
+}
+
+.btn {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+/*# sourceMappingURL=event_style.css.map */

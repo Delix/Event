@@ -31,4 +31,10 @@ class Guest(models.Model):
      # date =  models.DateField(_("Date"), default=datetime.date.today)
     
       event =  models.ForeignKey(Event,on_delete =  models.CASCADE)
-  
+
+class Contactus(models.Model):
+          Address =  models.CharField(max_length = 250,default = 'Office 112b – 115 Block C, JHB 55 Empire Road, Parktown' )
+          Call = models.CharField(max_length = 250,default = '+27 (0) 11 482 7256')
+          email = models.EmailField(max_length=70,default = 'info@empowaworx.co.za')
+
+          

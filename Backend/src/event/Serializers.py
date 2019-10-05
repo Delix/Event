@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from event.models import Event,Division,Guest
+from event.models import Event,Division,Guest,Contactus
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,9 +21,15 @@ class DivisionSerializer(serializers.ModelSerializer):
          #need to fill it in
         fields = '__all__'
 
-        class EventSerializer(serializers.ModelSerializer):
+class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
+         #need to fill it in
+        fields = '__all__'
+
+class ContactusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contactus
          #need to fill it in
         fields = '__all__'
 

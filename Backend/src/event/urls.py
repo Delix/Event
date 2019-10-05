@@ -1,9 +1,13 @@
-from .api import DivisionViewSet
-from rest_framework import router
+from .api import DivisionViewSet,ContactViewSet,EventViewSet
+from rest_framework import routers
 
 
 
 router = routers.DefaultRouter()
-router.register('api/Divisions', DivisionViewSet,'Divisions')
+router.register('Divisions', DivisionViewSet,'Divisions')
+router.register('Contact', ContactViewSet,'Contact')
+router.register('Events', EventViewSet,'Events')
+
+
 
 urlpatterns = router.urls

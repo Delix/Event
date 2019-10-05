@@ -1,14 +1,13 @@
 import axios from 'axios'
-import { GET_DIVISIONS } from './types';
+import { GET_CONTACT } from './types';
 
-export const getdiv = () => dispatch => {
-    axios.get('/api/Divisions')
+export const getcon = () => dispatch => {
+    axios.get('/api/Contact')
     .then(res => {
         dispatch({
-            type : GET_DIVISIONS,
+            type : GET_CONTACT,
             payload:res.data
         
         });
     }).catch(err => console.log(err));
 }
-
