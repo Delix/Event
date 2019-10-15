@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_EVENTS,GET_AEVENTS } from './types';
+import { GET_EVENTS,GET_AEVENT ,GET_DIVEVENTS } from './types';
 
 export const getevents = () => dispatch => {
     axios.get('/api/Events/')
@@ -15,14 +15,14 @@ export const getevents = () => dispatch => {
 }
 
 export const getdivevents = (id) => dispatch=>
-{
+{  
     dispatch({
-    type: GET_AEVENTS,
+    type: GET_DIVEVENTS,
     payload:id
     });
 }
-/*export const getevent = (id) => dispatch =>
+export const getevent = (id) => dispatch =>
 {  dispatch({
     type: GET_AEVENT,
     id });
-}*/
+}

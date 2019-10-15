@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here. need work on date and def
 
@@ -24,7 +25,7 @@ class Guest(models.Model):
 
       company = models.CharField(max_length = 250)
       sector = models.CharField(max_length = 250)
-
+      owner = models.ForeignKey(User,related_name = "Guests",on_delete = models.CASCADE,null = True)
       hear = models.CharField(max_length = 250)
       previous = models.CharField(max_length = 250)
         
