@@ -6,10 +6,10 @@ import Nav from './Header/Nav';
 import Dom from 'react-dom';
 import Event from './Events';
 import Form from './Form/Form';
-import Home from './Homeevent';
+
 import Quest from "./Form/Questionform"
 import Footer from './Footer/Footer';
-import Homeevent from './Homeevent';
+
 import Questionform from './Form/Questionform';
 
 
