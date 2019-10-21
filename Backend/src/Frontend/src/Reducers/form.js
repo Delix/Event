@@ -12,7 +12,7 @@ export default function(state = initialState,action ){
         case GET_NO:  
         return {
           ...state,
-          Number: action.number
+          Number: action.payload
           
         }
 

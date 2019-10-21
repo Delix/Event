@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development --watch ./Backend/src/Frontend/src/index.js --output ./Backend/src/Frontend/static/Frontend/work.js",
+    "dev": "webpack --mode development --watch ./Backend/src/Frontend/src/index.js --output ./Backend/src/Frontend/static/Frontend/work3.js",
     "build": "webpack --mode production ./Backend/src/Frontend/src/index.js --output ./Backend/src/Frontend/static/main.js"
   },
   "keywords": [],

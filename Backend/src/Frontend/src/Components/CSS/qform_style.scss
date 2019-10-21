@@ -1,19 +1,48 @@
-body
+.card
 {
-    background-color: #e9ecef;
+    margin: 50px;
+    text-align: center;
 
-  
-}
 .jumbotron
 {
-    height: 100%;
- .row
+    hr
     {
-    #line
-    {
-     
-        height: 100%;
-      
+        width: 80%;
     }
+    h1
+    {
+     text-align: center; 
+    }
+
+    .container
+    { 
+       
+        margin-bottom: 50px;
+           
+           
+          button
+          {
+           margin-right: 30px;
+          }
+        
+    }
+
+
+.Container
+{
+    visibility: hidden;
+   
+ 
+      margin:  auto auto;
+      input[type=number]
+      {
+         padding-left: 50px;
+      }
+
+
+}
+
+
+
   }
 }
