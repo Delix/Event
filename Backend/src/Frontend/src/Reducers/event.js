@@ -3,7 +3,7 @@ import { NEW_EVENT, GET_EVENTS,GET_AEVENT,GET_DIVEVENTS } from '../actions/types
 const initialState = {
     Events :[],
     DivEvents:[],
-    Event :""
+    Event : 1,
 }
 
 export default function(state = initialState,action ){
@@ -26,16 +26,18 @@ export default function(state = initialState,action ){
                 })
             }
       case GET_AEVENT:
-        return state;
+        return {
+          ...state,
+           Event:action.payload
+
+
+        }
        
        
       // map(event => event.id === action.id ? Event : event)
 
 
-        case NEW_EVENT:
-            return{
-             state   
-            }
+       
 
         default:
             return state;

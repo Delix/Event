@@ -15,3 +15,4 @@ export const DELETE_FORM = 'DELETE_FORM'
 export const EDIT_FORM = 'EDIT_FORM'
 
 export const GET_NO = 'GET_NO';
+export const SEND_FORM = 'SEND_FORM';

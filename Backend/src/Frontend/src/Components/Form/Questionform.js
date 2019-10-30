@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Form from './Form'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../CSS/qform_style.scss';
@@ -10,8 +11,8 @@ class Questionform extends Component
   constructor()
   {
     super()
-    this.state = {group:false };
-
+    this.state = {group:false,noofguest:2};
+ 
   }
 
   static proptypes = {
@@ -30,25 +31,30 @@ class Questionform extends Component
 
 
   }
-finalize = (value) =>
-{
- 
-  
-  if(value > 0)
+  updatenoofguest = (event) =>
   {
-    this.props.getnumber(value);
-
-  } 
-  else
-  {
-    let guest =  document.getElementById("guest").value;
-    this.props.getnumber(guest);
+    
+      this.setState({noofguest:event.target.value});
+    
+   
   }
 
-   
-   
+finalizegroup = (event) =>
+{
+  let guest = document.getElementById("guest");
+
+    this.props.getnumber(guest.value);
+
+ 
+    event.preventDefault();
+  
+  
 
    
+}
+finalizesingle = () =>
+{
+  this.props.getnumber(1);
 }
   
   
@@ -66,7 +72,7 @@ finalize = (value) =>
 
    
  
-  <button value = "Single" onClick = {this.finalize.bind(this,1)} className="btn btn-primary btn-lg" >Single Booking</button>
+  <button value = "Single" onClick = {this.finalizesingle} className="btn btn-primary btn-lg" >Single Booking</button>
     
 
   
@@ -86,22 +92,22 @@ finalize = (value) =>
   <br/>
 
  
-  <div className="row">   
+  
+  
+<form onSubmit = {this.finalizegroup.bind(this)}>
+
+  <input  id = "guest" type = "number" defaultValue = { this.state.noofguest } onChange = {this.updatenoofguest.bind(this)} name= "noofguest" min ="2" max = "18" required/>
+
+
+
+
+  <input   type = "submit" className="btn btn-primary btn-lg" />
   
 
-    <div className="col">
-  <input id = "guest" type = "number" defaultValue = "2" name= "noofguest" min ="2" max = "18" />
-  </div>
-  <br/>
-
-  <div className="col">
-  <input  onClick = {this.finalize.bind(this,0)} type = "submit" className="btn btn-primary btn-lg" href="#" role="button"/>
-  </div>
-
-
+  </form>
 
   
-  </div>
+
 
 
   </div>
@@ -115,8 +121,5 @@ finalize = (value) =>
     }
 }
 
-const mapStateToProps = state => ({
- 
-});
 
-export default connect(mapStateToProps,{ getnumber })(Questionform);
+export default connect(null,{ getnumber })(Questionform);

@@ -30,15 +30,22 @@
 
 .Container
 {
-    visibility: hidden;
+  text-align: center;
+  visibility: hidden;
    
- 
-      margin:  auto auto;
-      input[type=number]
+     
+     
+      input
       {
-         padding-left: 50px;
+         margin-right: 50px;
       }
-
+      input[type = number]
+      {
+        text-align: center;
+        width: 6%;
+      
+      }
+    
 
 }
 

@@ -24,5 +24,5 @@ export const getdivevents = (id) => dispatch=>
 export const getevent = (id) => dispatch =>
 {  dispatch({
     type: GET_AEVENT,
-    id });
+    payload:id });
 }

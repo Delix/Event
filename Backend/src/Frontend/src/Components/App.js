@@ -4,25 +4,29 @@ import { Provider } from  'react-redux';
 import  Store  from '../store';
 import Nav from './Header/Nav';
 import Dom from 'react-dom';
-import Event from './Events';
-import Form from './Form/Form';
-
-import Quest from "./Form/Questionform"
 import Footer from './Footer/Footer';
-
-import Questionform from './Form/Questionform';
+import Mainform from './Form/Mainform';
 
 
 export default function App() {
   return (
 <Provider store = { Store }>
+  <div className = "row">
+  <div className = "col">
+
     <Nav/>
-    <div>
-
-      <Questionform/>
-
     </div>
+    </div>
+    <div className = "row">
+    <div className = "col">
+      <Mainform/>
+    </div>
+    </div>
+    <div className = "row">
+    <div className = "col">
     <Footer/>
+    </div>
+    </div>
     </Provider>
   );
 }
