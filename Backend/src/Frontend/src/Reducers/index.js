@@ -3,6 +3,7 @@ import division from './division';
 import event from './event';
 import contact from './contact';
 import form from './form';
+import term from './term'
 
 
 export default  combineReducers ({
@@ -10,6 +11,7 @@ export default  combineReducers ({
     event,
     division,
     contact,
-    form
+    form,
+    term
 
 });

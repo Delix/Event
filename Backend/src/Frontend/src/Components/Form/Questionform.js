@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import '../CSS/qform_style.scss';
 import { getnumber } from "../../actions/form";
 
+
 class Questionform extends Component 
 {
   

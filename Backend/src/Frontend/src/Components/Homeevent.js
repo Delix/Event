@@ -120,7 +120,7 @@ setupdisplay()
         
         
         <div className="modal-body" id = "body">
-        {
+       {
              this.state.displayQuestions &&   
             
           <Events event = {this.props.divevents}/>

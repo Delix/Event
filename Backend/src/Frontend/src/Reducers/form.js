@@ -3,7 +3,7 @@ import {GET_NO,SEND_FORM} from '../actions/types.js';
 
 const initialState = {
     Form :"",
-    Number: 5,
+    persons: [],
     Status:""  
 }
 
@@ -14,7 +14,7 @@ export default function(state = initialState,action ){
         case GET_NO:  
         return {
           ...state,
-          Number: action.payload
+          persons: action.payload
           
           }
           case SEND_FORM:

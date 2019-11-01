@@ -5,10 +5,28 @@ import { GET_NO,SEND_FORM} from './types';
 
 export const getnumber = (number) => dispatch=>
 {
+     let persons = [];
+        while(persons.length < number)
+       { 
+    let person =  {
+        id: persons.length,
+        title:"",
+        firstName:"",
+        lastName:"",
+        designation:"",
+        email:"",
+        phone:"",
+        date:""
+        };
+         persons.push(person);
+       
+        }
+    
     
     dispatch({
     type: GET_NO,
-    payload:number
+
+    payload:persons
     });
 }
 

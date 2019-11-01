@@ -38,4 +38,7 @@ class Contactus(models.Model):
           Call = models.CharField(max_length = 250,default = '+27 (0) 11 482 7256')
           email = models.EmailField(max_length=70,default = 'info@empowaworx.co.za')
 
-          
+class TermsCondition(models.Model):
+          name =  models.TextField()
+          Description = models.TextField()
+       

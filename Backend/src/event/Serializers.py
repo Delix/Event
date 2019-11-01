@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from event.models import Event,Division,Guest,Contactus
+from event.models import Event,Division,Guest,Contactus,TermsCondition
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
@@ -33,4 +33,8 @@ class ContactusSerializer(serializers.ModelSerializer):
          #need to fill it in
         fields = '__all__'
 
-   
+class TermConditionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TermsCondition
+         #need to fill it in
+        fields = '__all__'

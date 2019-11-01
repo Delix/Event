@@ -1,5 +1,7 @@
 export const GET_DIVISIONS = 'GET_DIVISIONS';
 
+
+export const GET_TERM = 'GET_TERM';
 export const GET_CONTACT = 'GET_CONTACT';
 
 export const GET_EVENTS = 'GET_EVENTS';

@@ -2,79 +2,71 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Form from "./Form"
-
+import { getTerm} from "../../actions/term"
+import { getnumber } from "../../actions/form"
 class MainForm extends Component 
 { 
     constructor()
     {
         super();
         this.state = {
-            persons : [],
             company : {
                 name:"",
                 sector:"",
                 hear: ""
             },
-           contact : "",
+            dropdown: ["Facebook","Twitter","Empowaworx Website","Word of Mouth","Print Media","Other"],
+            contact : "",
            previous :"",
            formid : "5" 
                                
         };
-
+       
         
-    for (let i = 0; i < 5; i++)
-    {
-      let person =  {
-           id: i,
-           title:"",
-           firstName:"",
-           lastName:"",
-           designation:"",
-           email:"",
-           phone:"",
-           date:""
-           };
-      this.state.persons.push(person);
-    }
 
-    
+
 
 
 }
 
+componentDidMount()
+{
+    this.props.getTerm();
+    this.props.getnumber(5)
 
-
-
+}
 static Proptypes = {
+    
+    getTerm:PropTypes.func.isRequired,
+    getnumber:PropTypes.func.isRequired,
 
-    event: PropTypes.number.isRequired,
-    number: PropTypes.number.isRequired
 }
  
 
 
-    
-   
 
 
    
     render() {
-        return (
-
+  
+    
+    
+            return (
+           
             
-            <div>
-                <Form form = {this.state}/>
-               
-            </div>
-        )
-    }
+                <div>
+                   
+               <Form  form = {this.state}/>
+                   
+                </div>
+            )
+          }
+     
+    
 }
 
-    
-const mapStateToProps = state => ({
-    number: state.form.Number,
-    event: state.event.Event
 
-});
 
-export default connect(mapStateToProps)(MainForm)
+
+
+export default connect(null,{  getTerm,getnumber })(MainForm)
