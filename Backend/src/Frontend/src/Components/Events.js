@@ -17,12 +17,12 @@ function Events(props)
 
   };
   
-  moreinfo = () =>
+  const moreinfo = () =>
   {
 
   }
 
-  SendtoState = () =>
+  const SendtoState = () =>
   {
       this.props.getevent(props.event)
   }
@@ -33,7 +33,7 @@ function Events(props)
            
     
     { props.event.map( event =>(
-
+       <div>
        <div key = { event.id } className="card">
 
             <div className="card-header">
@@ -50,14 +50,16 @@ function Events(props)
           <div className = "row">
 
          <div className = "col-sm">
-         <a onClick = {this.SendtoState}  className="btn btn-primary">RSVP</a>
-         <a onClick = {this.moreinfo }  className="btn btn-primary" >Learn more</a>
+         <a onClick = {SendtoState}  className="btn btn-primary">RSVP</a>
+         <a onClick = {moreinfo }  className="btn btn-primary" >Learn more</a>
          </div>
       
           </div>
        </div>
-
+      
       </div>
+      <br/>
+    </div>
 
 )) }
 

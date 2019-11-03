@@ -26,12 +26,24 @@ function Form(props)
         switch(e.target.name)
 {
 case "title":  
-
+if(id != props.form.contact.id)
+{
 props.form.persons[id].title = e.target.value;
+}
+else
+{
+  props.form.contact.title = e.target.value;
+}
    break;    
 case "phone":
-    
-    props.form.persons[id].phone = e.target.value;
+  if(id != props.form.contact.id)
+  {
+     props.form.persons[id].phone = e.target.value;
+  }
+  else
+  {
+    props.form.contact.phone = e.target.value;
+  }
     break;
 case "Lname": 
 
@@ -42,15 +54,28 @@ case "Fname":
         props.form.persons[id].firstname = e.target.value    ;
         break; 
 case "mail":
-    
+  if(id != props.form.contact.id)
+  {
+    console.log("no")
     props.form.persons[id].email = e.target.value;
+  }
+else
+{
+
+  props.form.contact.email = e.target.value;
+  console.log(props.form.contact.email);
+}
     break;
+
+case "name":
+  props.contact.name = e.target.value;
+  break;
 case "designation":
     
     props.form.persons[id].designation = e.target.value ;
      break; 
 
-     case "name":
+     case "company":
     
     props.form.company.name = e.target.value ;
      break; 
@@ -126,6 +151,7 @@ case "designation":
     
     return (
         <div className = "Container">
+          <form>
 <legend>Company information</legend>         
 <div className="card">
       <div className = "card-body">
@@ -133,11 +159,11 @@ case "designation":
   <div className="row">
 
     <div className="col">
-      <input type="text" onChange = { (e) => attendeesinfo(e,0)} name ="name" className="form-control" placeholder="Name" isRequired/>
+      <input type="text" onChange = { (e) => attendeesinfo(e,0)} name ="company" className="form-control" placeholder="Name" required/>
     </div>
 
     <div className="col">
-      <input type="text" className="form-control" onChange = { (e) => attendeesinfo(e,0)} name ="sector" placeholder="Sector" isRequired/>
+      <input type="text" className="form-control" onChange = { (e) => attendeesinfo(e,0)} name ="sector" placeholder="Sector" required/>
     </div>
     </div>
    
@@ -153,19 +179,24 @@ case "designation":
 
 <div className = "row">
 <div className="col-4">
-      <input type="text"  onChange = { (e) => attendeesinfo(e,-1) }    className="form-control" name= "Title"placeholder="Title" isRequired/>
+      <input type="text"  onChange = { (e) => attendeesinfo(e,props.form.contact.id) }    className="form-control" name= "Title"placeholder="Title" required/>
     </div>
 
   <div className="col-4">
-      <input type="text"  onChange = { (e) => attendeesinfo(e,-1) }    className="form-control" name= "name"placeholder="Name" isRequired/>
+      <input type="text"  onChange = { (e) => attendeesinfo(e,props.form.contact.id) }    className="form-control" name= "name"placeholder="Name" required/>
     </div>
 
     <div className="col-4">
-      <input type="email"     onChange = { (e) => attendeesinfo(e,-1) }  className="form-control" name = "mail" placeholder="E-mail" isRequired/>
+      <input type="email"     onChange = { (e) => attendeesinfo(e,props.form.contact.id) }  className="form-control" name = "mail" placeholder="E-mail" required/>
      </div>
 
      </div>
+     <br/>
+<div className = "row">
+   <div className="col-4">
+      <input type="tel"  onChange = { (e) => attendeesinfo(e,props.form.contact.id) }    className="form-control" name= "Phone"placeholder="Phone" required/>
     </div>
+  </div>
 </div>
 </div>
 <br/>
@@ -185,15 +216,15 @@ case "designation":
   <div className="row">
 
   <div className="col-auto">
-      <input name = "title"    type ="text"  onChange = { (e) => attendeesinfo(e,person.id) } className="form-control" placeholder="Title" isRequired/>
+      <input name = "title"    type ="text"  onChange = { (e) => attendeesinfo(e,person.id) } className="form-control" placeholder="Title" required/>
     </div>
 
     <div className="col-4">
-      <input type="text"  onChange = { (e) => attendeesinfo(e,person.id) }    className="form-control" name= "Fname"placeholder="First name" isRequired/>
+      <input type="text"  onChange = { (e) => attendeesinfo(e,person.id) }    className="form-control" name= "Fname"placeholder="First name" required/>
     </div>
 
     <div className="col-4">
-      <input type="text"     onChange = { (e) => attendeesinfo(e,person.id) }  className="form-control" name = "Lname" placeholder="Last name" isRequired/>
+      <input type="text"     onChange = { (e) => attendeesinfo(e,person.id) }  className="form-control" name = "Lname" placeholder="Last name" required/>
     </div>
    
     </div>
@@ -203,14 +234,14 @@ case "designation":
   <div className="row">
 
   <div className="col-4">
-    <input type="text"   onChange = { (e) => attendeesinfo(e,person.id)} className="form-control" name = "Designation" placeholder="Designation" isRequired/>
+    <input type="text"   onChange = { (e) => attendeesinfo(e,person.id)} className="form-control" name = "Designation" placeholder="Designation" required/>
   </div>
   <div className="col-4">
-    <input type="email"   onChange = { (e) => attendeesinfo(e,person.id)}  className="form-control" name = "mail" placeholder="E-mail" isRequired/>
+    <input type="email"   onChange = { (e) => attendeesinfo(e,person.id)}  className="form-control" name = "mail" placeholder="E-mail" required/>
   </div>
 
   <div className="col-auto">
-    <input type="tel" onChange = { (e) => attendeesinfo(e,person.id)}  className="form-control" name = "phone" placeholder="Phone number" isRequired/>
+    <input type="tel" onChange = { (e) => attendeesinfo(e,person.id)}  className="form-control" name = "phone" placeholder="Phone number" required/>
   </div>
   </div>
 
@@ -253,7 +284,7 @@ case "designation":
   
   <div id= "newField1"className="row">
 <div className="col">
-<textarea placeholder = "please specify" rows = "5" cols = "60"/>
+<textarea name = "hear" onChange = {(e) => attendeesinfo(e,0)} placeholder = "please specify" rows = "5" cols = "60" required/>
   </div>
   </div>
 
@@ -277,7 +308,7 @@ case "designation":
   
 <div id= "newField2"className="row">
 <div className="col">
-<textarea placeholder = "please specify "rows = "5" cols = "60"/>
+<textarea name = "previous" onChange = {(e) => attendeesinfo(e,0)} placeholder = "please specify "rows = "5" cols = "60" required/>
   </div>
   </div>
 
@@ -294,17 +325,16 @@ case "designation":
       <h6>{term.name}</h6>
       <p>{term.Description}</p>
 
-    </div> 
-
-
+    </div>
 ))}
-
 </div>
 
 </div>
 
+<input type = "submit" className="btn btn-primary btn-lg" />
+</div>
 
-
+</form>
      </div>
     )
 }

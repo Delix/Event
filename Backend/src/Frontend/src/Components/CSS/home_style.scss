@@ -10,7 +10,9 @@ $fontShadow: black;
   background-image: linear-gradient(-225deg, rgb(165, 99, 175) 0%, #D41872 52%, #FF0066 100%);
  width: 100%;
  overflow-x: hidden;
-.row
+.container
+{
+ .row
 {
 
   display: block;  
@@ -67,7 +69,7 @@ $fontShadow: black;
   }
 
 }
-
+}
 }
 
 

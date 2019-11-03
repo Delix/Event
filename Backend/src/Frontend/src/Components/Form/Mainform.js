@@ -13,11 +13,16 @@ class MainForm extends Component
             company : {
                 name:"",
                 sector:"",
-                hear: ""
+                hear: "Facebook"
             },
             dropdown: ["Facebook","Twitter","Empowaworx Website","Word of Mouth","Print Media","Other"],
-            contact : "",
-           previous :"",
+            contact :  {
+            id:-1,
+            title:"",
+            name:"",
+            email:"",
+            phone:""},
+           previous :"No",
            formid : "5" 
                                
         };
@@ -32,7 +37,7 @@ class MainForm extends Component
 componentDidMount()
 {
     this.props.getTerm();
-    this.props.getnumber(5)
+    this.props.getnumber(1)
 
 }
 static Proptypes = {

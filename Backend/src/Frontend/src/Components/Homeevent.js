@@ -74,6 +74,7 @@ setupdisplay()
           
      
         return (
+          <div className = "container">
             <main className="row">
               
               <section>
@@ -136,7 +137,7 @@ setupdisplay()
 
   </div>
                 </main>
-               
+                </div>
             
         )
         
