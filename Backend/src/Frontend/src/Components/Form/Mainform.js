@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Form from "./Form"
 import { getTerm} from "../../actions/term"
-import { getnumber } from "../../actions/form"
+
 class MainForm extends Component 
 { 
     constructor()
@@ -23,7 +23,6 @@ class MainForm extends Component
             email:"",
             phone:""},
            previous :"No",
-           formid : "5" 
                                
         };
        
@@ -37,13 +36,14 @@ class MainForm extends Component
 componentDidMount()
 {
     this.props.getTerm();
-    this.props.getnumber(1)
+
 
 }
 static Proptypes = {
     
     getTerm:PropTypes.func.isRequired,
-    getnumber:PropTypes.func.isRequired,
+    persons:PropTypes.array.isRequired
+
 
 }
  
@@ -54,7 +54,7 @@ static Proptypes = {
    
     render() {
   
-    
+     
     
             return (
            
@@ -71,7 +71,11 @@ static Proptypes = {
 }
 
 
+const mapStateToProps = state => ({
+    persons: state.form.persons
+
+});
 
 
 
-export default connect(null,{  getTerm,getnumber })(MainForm)
+export default connect(mapStateToProps,{  getTerm })(MainForm)

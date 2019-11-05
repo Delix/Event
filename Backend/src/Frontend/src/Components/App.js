@@ -2,16 +2,18 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
-} from "react-router-dom";
+  Route
+} 
+from "react-router-dom";
 import { Provider } from  'react-redux';
 import  Store  from '../store';
 import Nav from './Header/Nav';
 import Dom from 'react-dom';
 import Footer from './Footer/Footer';
-import Mainform from './Form/Mainform';
+import MainForm from './Form/Mainform';
+import Questionform from './form/Questionform';
 import Homeevent from './Homeevent';
+
 
 
 export default function App() {
@@ -27,13 +29,15 @@ export default function App() {
     <div className = "row">
     <div className = "col">
       <Switch>
-        <Route path = "/form">
-      <Mainform/>
+        <Route exact path = "/form" >
+        <Questionform  />
       </Route>
-      <Route path = "/">
+      <Route exact path = "/formpage" >
+      <MainForm/>
+      </Route>
+      <Route exact path = "/">
       <Homeevent/>
       </Route>
-
       </Switch>
     </div>
     </div>

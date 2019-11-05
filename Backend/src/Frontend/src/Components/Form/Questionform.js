@@ -1,67 +1,75 @@
-import React, { Component } from 'react'
-import Form from './Form'
+import React from 'react';
+import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../CSS/qform_style.scss';
 import { getnumber } from "../../actions/form";
 
 
-class Questionform extends Component 
+
+function Questionform(props) 
 {
-  
-  constructor()
-  {
-    super()
-    this.state = {group:false,noofguest:2};
- 
-  }
+   let noofguest = 2;
+   let group = false;
 
-  static proptypes = {
 
-    getnumber: PropTypes.func.isRequired
+
+   Questionform.proptypes = {
+
+    getnumber: PropTypes.func.isRequired,
+    noofguest: PropTypes.number.isRequired,
+    group: PropTypes.bool.isRequired
   
     
 
 };  
 
- selectbook = () =>
+ const selectbook = () =>
  {
-  this.setState( {group:true});
+   group = true;
   
   document.getElementById("c1").style.visibility = "visible";
 
 
   }
-  updatenoofguest = (event) =>
+  const updatenoofguest = (event) =>
   {
-    
-      this.setState({noofguest:event.target.value});
+     noofguest = event.target.value;
     
    
   }
 
-finalizegroup = (event) =>
+const finalizegroup = (e) =>
 {
   let guest = document.getElementById("guest");
+  let message = document.getElementById("message");
+  if(guest.checkValidity())
+  {
+    group = false; 
+    props.getnumber(noofguest); 
+    noofguest = 2;
 
-    this.props.getnumber(guest.value);
+  }
+  else
+  {    message.innerHTML = guest.validationMessage;
+    e.preventDefault();
 
- 
-    event.preventDefault();
-  
-  
+  }
 
-   
+
 }
-finalizesingle = () =>
+const finalizesingle = () =>
 {
-  this.props.getnumber(1);
+  props.getnumber(1);
+  group = false; 
+  noofguest = 2;
 }
+
+
   
-  
-  render() {
+
         return (
-            
+          
           <div className = "card">
             <div className = "card-body">
              <div className="jumbotron">
@@ -69,16 +77,16 @@ finalizesingle = () =>
   <hr className="my-4"/>
 
 
-  <div className="container">
+  <div className="QFcontainer">
 
    
  
-  <button value = "Single" onClick = {this.finalizesingle} className="btn btn-primary btn-lg" >Single Booking</button>
+  <Link to = "/formpage"  value = "Single" onClick = {finalizesingle} className="btn btn-primary btn-lg" >Single Booking</Link>
     
 
   
  
-  <button value = "Group" onClick = {this.selectbook} className="btn btn-primary btn-lg">Group Booking</button>
+  <button value = "Group" onClick = {selectbook} className="btn btn-primary btn-lg">Group Booking</button>
    
 
 
@@ -86,7 +94,7 @@ finalizesingle = () =>
   </div>
 
 
-<div id = "c1"className = "Container">
+<div id = "c1">
 <h1  className = "display-4">Please Kindly indicate How many will be attending below?</h1>
   <hr className="my-4"/>
 
@@ -94,18 +102,20 @@ finalizesingle = () =>
 
  
   
+ 
+
+  <input  id = "guest"type = "number" defaultValue = { noofguest } onChange = {(e) => updatenoofguest(e)} name= "noofguest" min ="2" max = "18" required/>
+
+
+
+
+  <Link onClick =  {(e) => finalizegroup(e)} to= "/formpage"  className="btn btn-primary btn-lg" >Submit</Link>
   
-<form onSubmit = {this.finalizegroup.bind(this)}>
-
-  <input  id = "guest" type = "number" defaultValue = { this.state.noofguest } onChange = {this.updatenoofguest.bind(this)} name= "noofguest" min ="2" max = "18" required/>
-
-
-
-
-  <input   type = "submit" className="btn btn-primary btn-lg" />
-  
-
-  </form>
+  <div>
+   
+    <h6 id = "message"></h6>
+    
+  </div>
 
   
 
@@ -117,10 +127,16 @@ finalizesingle = () =>
 
 </div>
 </div>
+
+
 </div>
+
+
+
+        
         )
-    }
 }
+
 
 
 export default connect(null,{ getnumber })(Questionform);

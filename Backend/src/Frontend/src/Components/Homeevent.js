@@ -11,13 +11,13 @@ class Homeevent extends Component {
     super();
 
   
-    this.state = {displayQuestions: false,div:""};
+    this.state = {displayQuestions: false};
   }
 
   static proptypes = {
       division:PropTypes.array.isRequired,
       event:PropTypes.array.isRequired,
-      divevent:PropTypes.array.isRequired ,
+
 
       getdiv: PropTypes.func.isRequired,
       getevents:PropTypes.func.isRequired,
@@ -41,27 +41,25 @@ class Homeevent extends Component {
  setupevent = (divisions) =>
 {
   
-
-  if(this.state.div == divisions.id)
+  if(this.state.div != divisions.id)
   {
-     console.log(this.props.divevents);
-  }
-  else
-  {
-  this.props.getdivevents(divisions.id);
+    this.props.getdivevents(divisions.id);
   this.setState({
       div : divisions.id
-  })
+  });
+ 
   }
-  this.setupdisplay();
 
+  this.setupdisplay();
+  document.getElementById("title").innerHTML = divisions.name;
 }
 
 setupdisplay()
 {
   this.setState({
     displayQuestions: !this.state.displayQuestions
-        })
+        });
+    
 }
 
 
@@ -74,19 +72,25 @@ setupdisplay()
           
      
         return (
-          <div className = "container">
-            <main className="row">
+          
+            <div className="hContainer">
               
-              <section>
+        <div className = "hcontainer1">
+             <div className = "row">
                 <div className = "col" >
                 <h1>Select a Division</h1>
                 </div>
-                <div className="w-100"></div>
-        
-                <div className = "col">
+             </div>
+             </div>
+
+                <br/>
+
+<div className = "hcontainer2">
+        <div className = "row">
+              
                    { this.props.divis.map( division =>(
-                      
-                               <div key={division.id}  className="card"  >
+                        <div key={division.id} className = "col-3">
+                               <div   className="card"  >
                                  <div onClick = { this.setupevent.bind(this,division)} data-toggle="modal" data-target="#myModal">
                                       <img   className="card-img-top" src= {division.image} alt="Card image cap"></img>
                                      <div className="card-body">
@@ -95,15 +99,16 @@ setupdisplay()
                                 </div>
                             
                              </div> 
-                      
-                    
+                                <br/>
+                             </div>
+            
     
                         )) }
 
                         
-                  
+        </div>
                   </div> 
-                  </section>
+                 
 
                   <div onClick = {this.setupdisplay.bind(this)} className="modal fade" id="myModal">
 
@@ -124,7 +129,7 @@ setupdisplay()
        {
              this.state.displayQuestions &&   
             
-          <Events event = {this.props.divevents}/>
+          <Events />
         }
 
         </div>
@@ -136,8 +141,8 @@ setupdisplay()
 
 
   </div>
-                </main>
-                </div>
+             
+             </div>  
             
         )
         
@@ -148,7 +153,7 @@ setupdisplay()
 const mapStateToProps = state => ({
     divis: state.division.divisions,
     event: state.event.Events,
-    divevents: state.event.DivEvents
+
 
 });
 

@@ -1,19 +1,25 @@
 import './CSS/event_style.scss';
 import React from 'react'
 import { connect } from 'react-redux';
-import { getevent }  from '../actions/form';
+import { getevent }  from '../actions/event';
 import PropTypes from 'prop-types';
+import {
+  Link
+} 
+from "react-router-dom";
+
 
 function Events(props)
  {
-  console.log(props.event)
+
  
 
 
    Events.proptypes =
   {
 
-  getevent: PropTypes.func.isRequired
+  getevent: PropTypes.func.isRequired,
+  divevents:PropTypes.array.isRequired
 
   };
   
@@ -24,7 +30,9 @@ function Events(props)
 
   const SendtoState = () =>
   {
-      this.props.getevent(props.event)
+    $('#myModal').modal('hide');
+      props.getevent(props.divevents);
+   
   }
   
    
@@ -32,7 +40,7 @@ function Events(props)
     <div className = "EContainer">
            
     
-    { props.event.map( event =>(
+    { props.divevents.map( event =>(
        <div>
        <div key = { event.id } className="card">
 
@@ -50,7 +58,7 @@ function Events(props)
           <div className = "row">
 
          <div className = "col-sm">
-         <a onClick = {SendtoState}  className="btn btn-primary">RSVP</a>
+         <Link to = "/form" onClick = {SendtoState}   className="btn btn-primary">RSVP</Link>
          <a onClick = {moreinfo }  className="btn btn-primary" >Learn more</a>
          </div>
       
@@ -68,8 +76,12 @@ function Events(props)
   )
 }
 
+const mapStateToProps = state => ({
+  divevents: state.event.DivEvents
 
-export default connect(null,{ getevent })(Events)
+});
+
+export default connect(mapStateToProps,{ getevent })(Events)
 
 
 

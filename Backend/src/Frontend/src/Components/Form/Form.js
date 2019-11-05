@@ -7,8 +7,9 @@ import { sendform } from '../../actions/form';
 
 function Form(props) 
 {
+ 
 
-  console.log(props.terms);
+  console.log(props.persons.length);
     Form.proptypes =
     {
   
@@ -150,7 +151,7 @@ case "designation":
 
     
     return (
-        <div className = "Container">
+        <div className = "formContainer">
           <form>
 <legend>Company information</legend>         
 <div className="card">
@@ -170,10 +171,14 @@ case "designation":
   </div>
 
 </div>
-<br/>
-<div className = "Contianer1">
-<legend>Point of contact</legend>
-<div className = "card">
+
+{props.persons.length != 1 &&
+
+  <div id = "formContianer1">
+  
+  <legend>Point of contact</legend>
+  <div className = "card">
+
 <div className ="card-body">
     
 
@@ -199,9 +204,11 @@ case "designation":
   </div>
 </div>
 </div>
+</div>
+}
 <br/>
 
-<fieldset>
+
     <legend>Attendees information</legend>
 { props.persons.map( person =>(
     
@@ -251,7 +258,7 @@ case "designation":
 
 
 )) }
-</fieldset>
+
 
 <legend>Other</legend> 
 <div className="card">
@@ -332,12 +339,15 @@ case "designation":
 </div>
 
 <input type = "submit" className="btn btn-primary btn-lg" />
+</form>
 </div>
 
-</form>
-     </div>
+
+
+
     )
 }
+
 
 const mapStateToProps = state => ({
     persons: state.form.persons,

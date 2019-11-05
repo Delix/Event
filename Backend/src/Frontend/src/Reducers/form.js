@@ -4,7 +4,7 @@ import {GET_NO,SEND_FORM} from '../actions/types.js';
 const initialState = {
     Form :"",
     persons: [],
-    Status:""  
+    Status:"" 
 }
 
 export default function(state = initialState,action ){
