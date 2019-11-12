@@ -1,6 +1,6 @@
 from rest_framework import viewsets,permissions
-from event.models import Division,Contactus,Event,TermsCondition
-from .Serializers import DivisionSerializer,ContactusSerializer,EventSerializer,TermConditionSerializer
+from event.models import Division,Contactus,Event,TermsCondition,Social
+from .Serializers import DivisionSerializer,ContactusSerializer,EventSerializer,TermConditionSerializer,SocialSerializer
 
 class DivisionViewSet(viewsets.ModelViewSet):
     queryset = Division.objects.all()
@@ -25,3 +25,9 @@ class TermConditionViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.AllowAny]
     serializer_class = TermConditionSerializer
+
+class SocialViewSet(viewsets.ModelViewSet):
+    queryset = Social.objects.all()
+    permission_classes = [
+        permissions.AllowAny]
+    serializer_class = SocialSerializer

@@ -41,11 +41,9 @@ export default function App() {
       </Switch>
     </div>
     </div>
-    <div className = "row">
-    <div className = "col">
+   
     <Footer/>
-    </div>
-    </div>
+  
     </Router>
     </Provider>
   );

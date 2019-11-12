@@ -3,18 +3,24 @@ import React, { Component } from 'react'
 import '../CSS/f_style.scss';
 import { connect } from 'react-redux';
 import { getcon }  from '../../actions/contact';
+import { getsocial } from '../../actions/social';
 
 class Footer extends Component {
  
 
   static proptypes = {
-      contact:PropTypes.array.isRequired
+    getcon:PropTypes.func.isRequired,
+    getsocial:PropTypes.func.isRequired,
+      contact:PropTypes.array.isRequired,
+      socials:PropTypes.array.isRequired
   };  
   
 
   componentDidMount()
   {
       this.props.getcon();
+      this.props.getsocial();
+    
   }
   
 
@@ -23,6 +29,8 @@ class Footer extends Component {
     render() {
         return (
             <footer>
+              <div className = "row">
+                <div className = "col">
                    { this.props.con.map( contact =>(
                       
                       
@@ -50,33 +58,36 @@ class Footer extends Component {
     
                         )) }
 
-<div className ="Container2">
-
-                <div>
-                <a href="#" className="fa-facebook"></a>
-                </div>
-
-                <div>
-                 <a href="#" className="fa-twitter"></a>
-                 </div>
-
-                 <div>
-                 <a href="#" className="fa-youtube"></a>
-                 </div>
+                        </div>
+                        </div>
+    <div className = "row">
+    { this.props.socials.map( social=>(
+                      
+                      
+                      <div key = { social.id } className="col-auto">
+                      
+                      <a href= { social.link } className= { social.name }></a>
+                    
+                      </div>
                  
-                 <div>
-                 <a href="#" className="fa fa-instagram"></a>
-                 </div>
-    </div>
+              
+                 
+                      
+                    
+    
+                        )) }
+                 
 
+                   </div>
                 </footer>
             
         )
     }
 }
-    
+
 const mapStateToProps = state => ({
-    con: state.contact.contact
+    con: state.contact.contact,
+    socials:state.contact.social
 });
 
-export default connect(mapStateToProps,{ getcon })(Footer);
+export default connect(mapStateToProps,{ getcon,getsocial })(Footer);

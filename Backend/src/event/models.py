@@ -7,7 +7,7 @@ class Division(models.Model):
     name = models.CharField(max_length = 250)
     image = models.CharField(max_length = 250)
 
-
+ 
 
 class Event(models.Model):
     name = models.CharField(max_length = 250)
@@ -15,23 +15,32 @@ class Event(models.Model):
     date = models.CharField(max_length = 8)
     division = models.ForeignKey(Division,on_delete = models.CASCADE)
 
-
-class Guest(models.Model):
-      title = models.CharField(max_length = 4)
-      name = models.CharField(max_length = 250)
-     #S contactno = 
-      designation = models.CharField(max_length = 250)
-      email = models.EmailField(max_length=70)
-
+class  Company(models.Model):
       company = models.CharField(max_length = 250)
       sector = models.CharField(max_length = 250)
-      owner = models.ForeignKey(User,related_name = "Guests",on_delete = models.CASCADE,null = True)
-      hear = models.CharField(max_length = 250)
-      previous = models.CharField(max_length = 250)
-        
-     # date =  models.DateField(_("Date"), default=datetime.date.today)
+
+class  Attendee(models.Model):
+      title = models.CharField(max_length = 4)
+      name = models.CharField(max_length = 250)
+      designation = models.CharField(max_length = 250)
+      email = models.EmailField(max_length=70)
+      company = models.ForeignKey(Company,on_delete = models.CASCADE)
+
+
+class Event_Form(models.Model):
+        previous = models.TextField()
+        hear = models.TextField()
+        event =  models.ForeignKey(Event,on_delete = models.CASCADE)
+        attendee = models.ForeignKey(Attendee,on_delete = models.CASCADE)
+        date = models.DateTimeField(auto_now_add=True)
+
     
-      event =  models.ForeignKey(Event,on_delete =  models.CASCADE)
+     
+class Social(models.Model):
+        Name = models.CharField(max_length = 250)
+        Image = models.CharField(max_length = 250 ,blank = True)
+        link = models.URLField(max_length=250)
+
 
 class Contactus(models.Model):
           Address =  models.CharField(max_length = 250,default = 'Office 112b – 115 Block C, JHB 55 Empire Road, Parktown' )
