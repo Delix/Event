@@ -11,8 +11,8 @@ class Footer extends Component {
   static proptypes = {
     getcon:PropTypes.func.isRequired,
     getsocial:PropTypes.func.isRequired,
-      contact:PropTypes.array.isRequired,
-      socials:PropTypes.array.isRequired
+    contact:PropTypes.array.isRequired,
+    ssocials:PropTypes.array.isRequired
   };  
   
 
@@ -37,7 +37,7 @@ class Footer extends Component {
                       <div key = { contact.id } className="container">
                         <div>
                         <h4 className="lead">Address</h4>
-                        <p>{ contact.Address }</p>
+                        <p>{ contact.address }</p>
                         </div>
                         <div>
                         <h4 className="lead">E-mail</h4>
@@ -45,7 +45,7 @@ class Footer extends Component {
                         </div>
                         <div>
                         <h4 className="lead">Telephone</h4>
-                        <p>{ contact.Call }</p>
+                        <p>{ contact.call }</p>
                         </div>
 
                     
@@ -61,6 +61,7 @@ class Footer extends Component {
                         </div>
                         </div>
     <div className = "row">
+  
     { this.props.socials.map( social=>(
                       
                       
@@ -87,7 +88,7 @@ class Footer extends Component {
 
 const mapStateToProps = state => ({
     con: state.contact.contact,
-    socials:state.contact.social
+    socials:state.social.socials
 });
 
 export default connect(mapStateToProps,{ getcon,getsocial })(Footer);

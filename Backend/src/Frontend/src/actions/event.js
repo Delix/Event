@@ -15,10 +15,23 @@ export const getevents = () => dispatch => {
 }
 
 export const getdivevents = (id) => dispatch=>
-{  
+{   let event = [];
+    let count = 0;
+      while(id.length > 0)
+    {
+      axios.get('/api/Events/'+id[count])
+.then(res =>
+    {
+       event.push(res.data)
+    }
+
+).catch(err => console.log(err))
+   count++;
+
+   }
     dispatch({
     type: GET_DIVEVENTS,
-    payload:id
+    payload:event
     });
 }
 export const getevent = (id) => dispatch =>

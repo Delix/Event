@@ -4,8 +4,8 @@ import { GET_SOCIAL} from './types';
 
 
 export const getsocial = () => dispatch=>
-{
-    axios.get("api/social")
+{    console.log("hello");
+    axios.get('/api/Social')
     .then(res => {
         dispatch({
             type : GET_SOCIAL,

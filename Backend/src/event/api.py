@@ -1,12 +1,20 @@
-from rest_framework import viewsets,permissions
+from rest_framework import viewsets,permissions,status
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+from django.http import Http404
 from event.models import Division,Contactus,Event,TermsCondition,Social
 from .Serializers import DivisionSerializer,ContactusSerializer,EventSerializer,TermConditionSerializer,SocialSerializer
 
-class DivisionViewSet(viewsets.ModelViewSet):
-    queryset = Division.objects.all()
-    permission_classes = [
-        permissions.AllowAny]
-    serializer_class = DivisionSerializer
+class DivisionList(APIView):
+
+    def get(self,request):
+         divisions = Division.objects.all()
+         serializer =DivisionSerializer(divisions,many = True)
+         return Response(serializer.data)
+   
+
+      
     
 class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contactus.objects.all()

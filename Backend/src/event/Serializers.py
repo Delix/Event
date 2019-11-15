@@ -21,10 +21,11 @@ class AttendeeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class DivisionSerializer(serializers.ModelSerializer):
-    class Meta:
+     events = serializers.PrimaryKeyRelatedField(many = True, read_only = True)
+     class Meta:
         model = Division
          #need to fill it in
-        fields = '__all__'
+        fields = ['name','image','events']
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:

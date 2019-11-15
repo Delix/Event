@@ -2,7 +2,7 @@ import {GET_SOCIAL} from '../actions/types.js';
 
 
 const initialState = {
-    socials :[],
+    socials:[]
    
 }
 
@@ -17,7 +17,7 @@ export default function(state = initialState,action ){
           
           }
         default:
-            return state;
+            return {...state};
 
     }
 }

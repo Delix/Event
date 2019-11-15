@@ -93,9 +93,7 @@ setupdisplay()
                                <div   className="card"  >
                                  <div onClick = { this.setupevent.bind(this,division)} data-toggle="modal" data-target="#myModal">
                                       <img   className="card-img-top" src= {division.image} alt="Card image cap"></img>
-                                     <div className="card-body">
-                                          <h2 className="card-title">{ division.name }</h2>
-                                    </div> 
+                      
                                 </div>
                             
                              </div> 
