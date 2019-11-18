@@ -1,12 +1,6 @@
 from rest_framework import serializers
 from event.models import Event,Division,Social,Event_Form,Attendee,Contactus,TermsCondition
 
-class EventSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Event
-         #need to fill it in
-        fields = '__all__'
-
 class Event_FormSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event_Form
@@ -25,7 +19,7 @@ class DivisionSerializer(serializers.ModelSerializer):
      class Meta:
         model = Division
          #need to fill it in
-        fields = ['name','image','events']
+        fields = ['id','name','image','events']
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:

@@ -19,17 +19,11 @@ class DivisionList(APIView):
 class EventList(APIView):
      
     permission_classes = [permissions.AllowAny]
-     
-    def get_object(self,division):
-         try:
-              return Event.objects.get(pk = division)
-         except events.DoesNotExist:
-               raise HttpResponse(status=404)
-         
 
     def get(self, request,division):
-        event = self.get_object(division)
-        serializer = EventSerializer(event)
-        return Response(serializer.data)
+        event = Event.objects.all().filter(division = division)
+        serializer = EventSerializer(event,many = True)
+        return Response(serializer.data)  
+
         
 

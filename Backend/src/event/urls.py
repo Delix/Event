@@ -7,7 +7,7 @@ from event import views
 
 urlpatterns = [
     path('Divisions/',views.DivisionList.as_view()),
-    path('<division>/',views.EventList.as_view())
+    path('Events/<division>/',views.EventList.as_view())
 ]
 #router = routers.DefaultRouter()
 #router.register('Divisions', DivisionViewSet,'Divisions')

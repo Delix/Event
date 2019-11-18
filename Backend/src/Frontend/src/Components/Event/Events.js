@@ -1,7 +1,6 @@
-import './CSS/event_style.scss';
 import React from 'react'
 import { connect } from 'react-redux';
-import { getevent }  from '../actions/event';
+import { getevent }  from '../../actions/event';
 import PropTypes from 'prop-types';
 import {
   Link
@@ -23,6 +22,8 @@ function Events(props)
 
   };
   
+ 
+  
   const moreinfo = () =>
   {
 
@@ -30,7 +31,6 @@ function Events(props)
 
   const SendtoState = () =>
   {
-    $('#myModal').modal('hide');
       props.getevent(props.divevents);
    
   }
@@ -39,9 +39,9 @@ function Events(props)
   return (
     <div className = "EContainer">
            
-    
+    <div className = "row">
     { props.divevents.map( event =>(
-       <div>
+       <div className = "col">
        <div key = { event.id } className="card">
 
             <div className="card-header">
@@ -52,24 +52,18 @@ function Events(props)
         <ul className="list-group list-group-flush">
         <li className="list-group-item">{ event.date }</li>
         <li className="list-group-item">{event.location }</li>
-        </ul> 
-
-       <div className = "carb-body">
-          <div className = "row">
-
-         <div className = "col-sm">
-         <Link to = "/form" onClick = {SendtoState}   className="btn btn-primary">RSVP</Link>
+        <li className = "list-group-item"><Link to = "/form" onClick = {SendtoState}   className="btn btn-primary">RSVP</Link>
          <a onClick = {moreinfo }  className="btn btn-primary" >Learn more</a>
-         </div>
-      
-          </div>
-       </div>
+         </li>
+        </ul> 
       
       </div>
       <br/>
     </div>
+    
 
 )) }
+</div>
 
    </div>    
 

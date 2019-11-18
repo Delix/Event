@@ -14,26 +14,21 @@ export const getevents = () => dispatch => {
     }).catch(err => console.log(err));
 }
 
-export const getdivevents = (id) => dispatch=>
-{   let event = [];
-    let count = 0;
-      while(id.length > 0)
+export const getdivevents = division => dispatch=>
+{   
+      axios.get('/api/Events/'+division).then(res =>
     {
-      axios.get('/api/Events/'+id[count])
-.then(res =>
-    {
-       event.push(res.data)
-    }
-
-).catch(err => console.log(err))
-   count++;
-
-   }
-    dispatch({
-    type: GET_DIVEVENTS,
-    payload:event
-    });
+      dispatch({
+        type: GET_DIVEVENTS,
+        payload: res.data
+        });
+    }).catch(err => console.log(err));
+   
+   
 }
+
+
+
 export const getevent = (id) => dispatch =>
 {  dispatch({
     type: GET_AEVENT,

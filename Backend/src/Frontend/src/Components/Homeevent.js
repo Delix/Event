@@ -2,26 +2,20 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react'
 import './CSS/home_style.scss';
 import { connect } from 'react-redux';
-import Events from './Events'
+import {
+  Link
+} 
+from "react-router-dom";
 import { getdiv }  from '../actions/division';
-import { getevents,getdivevents,getevent}  from '../actions/event';
+import { getdivevents }  from '../actions/event';
 
 class Homeevent extends Component {
-  constructor() {
-    super();
-
   
-    this.state = {displayQuestions: false};
-  }
-
   static proptypes = {
       division:PropTypes.array.isRequired,
-      event:PropTypes.array.isRequired,
 
 
       getdiv: PropTypes.func.isRequired,
-      getevents:PropTypes.func.isRequired,
-      getevent:PropTypes.func.isRequired,
       getdivevents:PropTypes.func.isRequired
       
 
@@ -32,41 +26,19 @@ class Homeevent extends Component {
   {
    
       this.props.getdiv();
-      this.props.getevents();
 
      
      
   }
 
- setupevent = (divisions) =>
+ setupevent = (division) =>
 {
   
-  if(this.state.div != divisions.id)
-  {
-    this.props.getdivevents(divisions.id);
-  this.setState({
-      div : divisions.id
-  });
+     console.log(division) 
+    this.props.getdivevents(division.id);
  
-  }
-
-  this.setupdisplay();
-  document.getElementById("title").innerHTML = divisions.name;
-}
-
-setupdisplay()
-{
-  this.setState({
-    displayQuestions: !this.state.displayQuestions
-        });
-    
-}
-
-
  
-
-
-
+}
 
     render() {
           
@@ -89,14 +61,16 @@ setupdisplay()
         <div className = "row">
               
                    { this.props.divis.map( division =>(
-                        <div key={division.id} className = "col-3">
-                               <div   className="card"  >
-                                 <div onClick = { this.setupevent.bind(this,division)} data-toggle="modal" data-target="#myModal">
-                                      <img   className="card-img-top" src= {division.image} alt="Card image cap"></img>
+                        <div key={division.id} onClick = { this.setupevent.bind(this,division)} className = "col-3">
+                             <Link to = "/form"   className="card">
+                             
+                                 
+                                      <img   className="card-img-top" src= {division.image} alt="Card image cap"/>
                       
-                                </div>
-                            
-                             </div> 
+                                
+                           
+                
+                             </Link>
                                 <br/>
                              </div>
             
@@ -106,40 +80,7 @@ setupdisplay()
                         
         </div>
                   </div> 
-                 
-
-                  <div onClick = {this.setupdisplay.bind(this)} className="modal fade" id="myModal">
-
-    <div className="modal-dialog modal-lg">
-      <div className="modal-content">
-     
-        <div className="modal-header">
-     
-                
-          <h4 className="modal-title" id ="title"></h4>
-         
-   
-          <button type="button"  className="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        
-        <div className="modal-body" id = "body">
-       {
-             this.state.displayQuestions &&   
-            
-          <Events />
-        }
-
-        </div>
-        
-   
-        
-      </div>
-    </div>
-
-
-  </div>
-             
+                   
              </div>  
             
         )
@@ -149,12 +90,11 @@ setupdisplay()
 }
     
 const mapStateToProps = state => ({
-    divis: state.division.divisions,
-    event: state.event.Events,
+    divis: state.division.divisions
 
 
 });
 
 
 
-export default connect(mapStateToProps,{ getdiv,getevents,getdivevents,getevent})(Homeevent);
+export default connect(mapStateToProps,{ getdiv,getdivevents})(Homeevent);

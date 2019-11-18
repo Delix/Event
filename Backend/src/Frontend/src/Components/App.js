@@ -13,6 +13,7 @@ import Footer from './Footer/Footer';
 import MainForm from './Form/Mainform';
 import Questionform from './form/Questionform';
 import Homeevent from './Homeevent';
+import MainEvent from './Event/MainEvent'
 
 
 
@@ -29,10 +30,13 @@ export default function App() {
     <div className = "row">
     <div className = "col">
       <Switch>
-        <Route exact path = "/form" >
+      <Route exact path ="/Form">
+       <MainEvent/>
+      </Route>
+        <Route exact path = "/Form" >
         <Questionform  />
       </Route>
-      <Route exact path = "/formpage" >
+      <Route exact path = "/Form" >
       <MainForm/>
       </Route>
       <Route exact path = "/">

@@ -21,9 +21,7 @@ export default function(state = initialState,action ){
             return {
               
                 ...state,
-                 DivEvents: state.Events.filter(event  =>{
-                  return event ?  event.division == action.payload :event
-                })
+                  DivEvents:action.payload
             }
       case GET_AEVENT:
         return {
