@@ -33,14 +33,23 @@ class  Attendee(models.Model):
       designation = models.CharField(max_length = 250)
       email = models.EmailField(max_length=70)
       company = models.ForeignKey(Company,on_delete = models.CASCADE)
+      contact = models.ForeignKey(Contact,on_delete = models.CASCADE)
        
       def __str__(self):
           return self.name
 
+class  Contact(models.Model):
+      title = models.CharField(max_length = 4,blank = True)
+      name = models.CharField(max_length = 250,blank = True)
+      phone = models.CharField(max_length = 250,blank = True)
+      email = models.EmailField(max_length=70,blank = True)
+
+      def __str__(self):
+          return self.name  
+
 class Event_Form(models.Model):
         previous = models.TextField()
         hear = models.TextField()
-      
         event =  models.ForeignKey(Event,on_delete = models.CASCADE)
         attendee = models.ForeignKey(Attendee,on_delete = models.CASCADE)
         date = models.DateTimeField(auto_now_add=True)

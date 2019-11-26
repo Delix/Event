@@ -62,7 +62,7 @@ class Homeevent extends Component {
               
                    { this.props.divis.map( division =>(
                         <div key={division.id} onClick = { this.setupevent.bind(this,division)} className = "col-3">
-                             <Link to = "/form"   className="card">
+                             <Link to = "/Event"   className="card">
                              
                                  
                                       <img   className="card-img-top" src= {division.image} alt="Card image cap"/>

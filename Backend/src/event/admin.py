@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event,Division,Attendee,Contactus,TermsCondition
+from .models import Event,Division,Attendee,Contactus,TermsCondition,Event_Form
 # Register your models here.
 
 admin.site.register(Event)

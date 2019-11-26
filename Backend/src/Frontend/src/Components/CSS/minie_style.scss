@@ -38,30 +38,31 @@
 {
     animation: slide-in-fwd-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     
-  
+      .EContainer
+      {
        .row
        {
            display: flex;
            width: 95%;
-           flex-direction: column;
+           flex-direction: row;
            .col
            {
             flex-wrap: wrap ;
             justify-content:space-evenly ;
-          
+            .card
+            {
+              margin: 50px 25px;
+              width: 357px;
+            
+            
+            }
 
            }
          }
 
-        
-        .card
-        {
-          margin: 50px 25px;
-          width: 357px;
-        
-        
-        
         }
+        
+       
 
     }
 

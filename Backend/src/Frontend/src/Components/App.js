@@ -30,13 +30,13 @@ export default function App() {
     <div className = "row">
     <div className = "col">
       <Switch>
-      <Route exact path ="/Form">
+      <Route exact path ="/Event">
        <MainEvent/>
       </Route>
         <Route exact path = "/Form" >
         <Questionform  />
       </Route>
-      <Route exact path = "/Form" >
+      <Route exact path = "/Form_1" >
       <MainForm/>
       </Route>
       <Route exact path = "/">

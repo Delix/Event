@@ -1,18 +1,19 @@
 from rest_framework import viewsets,permissions,status
-from rest_framework.views import APIView
+from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from django.http import Http404
-from event.models import Division,Contactus,Event,TermsCondition,Social
-from .Serializers import DivisionSerializer,ContactusSerializer,EventSerializer,TermConditionSerializer,SocialSerializer
+from event.models import Division,Contactus,Event,TermsCondition,Social,Event_Form
+from .Serializers import DivisionSerializer,ContactusSerializer,EventSerializer,TermConditionSerializer,SocialSerializer,Event_FormSerializer
 
-class DivisionList(APIView):
 
-    def get(self,request):
-         divisions = Division.objects.all()
-         serializer =DivisionSerializer(divisions,many = True)
-         return Response(serializer.data)
    
+class DivisionViewSet(viewsets.ModelViewSet):
+    queryset = Division.objects.all()
+    permission_classes = [
+        permissions.AllowAny]
+    serializer_class = DivisionSerializer
+
 
       
     
@@ -39,3 +40,9 @@ class SocialViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.AllowAny]
     serializer_class = SocialSerializer
+
+class Event_FormViewSet(viewsets.ModelViewSet):
+    queryset = Event_Form.objects.all()
+    permission_classes = [
+        permissions.AllowAny]
+    serializer_class = Event_FormSerializer

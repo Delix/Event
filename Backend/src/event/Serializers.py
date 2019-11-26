@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from event.models import Event,Division,Social,Event_Form,Attendee,Contactus,TermsCondition
+from event.models import Event,Contact,Division,Social,Event_Form,Attendee,Contactus,TermsCondition,Company
 
 class Event_FormSerializer(serializers.ModelSerializer):
     class Meta:
@@ -7,6 +7,12 @@ class Event_FormSerializer(serializers.ModelSerializer):
          #need to fill it in
         fields = '__all__'
    
+
+class CompanySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        #need to fill it in
+        fields = '__all__'
 
 class AttendeeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,6 +37,12 @@ class EventSerializer(serializers.ModelSerializer):
 class ContactusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contactus
+         #need to fill it in
+        fields = '__all__'
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
          #need to fill it in
         fields = '__all__'
 

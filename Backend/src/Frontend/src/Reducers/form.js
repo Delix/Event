@@ -1,4 +1,4 @@
-import {GET_NO,SEND_FORM} from '../actions/types.js';
+import {GET_NO,POST_SEND} from '../actions/types.js';
 
 
 const initialState = {
@@ -17,7 +17,7 @@ export default function(state = initialState,action ){
           persons: action.payload
           
           }
-          case SEND_FORM:
+          case POST_SEND:
           return {
             ...state,
             status: action.payload

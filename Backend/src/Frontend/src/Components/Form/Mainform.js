@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Form from "./Form"
 import { getTerm} from "../../actions/term"
 
+
 class MainForm extends Component 
 { 
     constructor()
@@ -12,17 +13,23 @@ class MainForm extends Component
         this.state = {
             company : {
                 name:"",
-                sector:"",
-                hear: "Facebook"
+                sector:""
             },
             dropdown: ["Facebook","Twitter","Empowaworx Website","Word of Mouth","Print Media","Other"],
             contact :  {
-            id:-1,
-            title:"",
-            name:"",
-            email:"",
-            phone:""},
+        
+                title:"",
+                name:"",
+                email:"",
+                phone:""},
+            Form: { 
+           contact:"",
+           attendee:"",
            previous :"No",
+           hear: "Facebook",
+           Event:""
+
+            }
                                
         };
        
@@ -36,13 +43,13 @@ class MainForm extends Component
 componentDidMount()
 {
     this.props.getTerm();
+    
 
 
 }
 static Proptypes = {
     
-    getTerm:PropTypes.func.isRequired,
-    persons:PropTypes.array.isRequired
+    getTerm:PropTypes.func.isRequired
 
 
 }
@@ -71,11 +78,6 @@ static Proptypes = {
 }
 
 
-const mapStateToProps = state => ({
-    persons: state.form.persons
-
-});
 
 
-
-export default connect(mapStateToProps,{  getTerm })(MainForm)
+export default connect(null,{  getTerm })(MainForm)

@@ -1,22 +1,15 @@
-from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework import routers
 from django.urls import path
-from event import views
+from .api import DivisionViewSet,ContactViewSet,EventViewSet,TermConditionViewSet,SocialViewSet
+
+router = routers.DefaultRouter()
+router.register('Divisions', DivisionViewSet,'Divisions')
+router.register('Contact', ContactViewSet,'Contact')
+
+router.register('Events', EventViewSet,'Events')
+router.register('TermCondition', TermConditionViewSet,'TermCondition')
+router.register('Social', SocialViewSet,'Social')
 
 
 
-
-urlpatterns = [
-    path('Divisions/',views.DivisionList.as_view()),
-    path('Events/<division>/',views.EventList.as_view())
-]
-#router = routers.DefaultRouter()
-#router.register('Divisions', DivisionViewSet,'Divisions')
-#router.register('Contact', ContactViewSet,'Contact')
-
-#router.register('Events', EventViewSet,'Events')
-#router.register('TermCondition', TermConditionViewSet,'TermCondition')
-#router.register('Social', SocialViewSet,'Social')
-
-
-
-urlpatterns =  urlpatterns
+urlpatterns =  router.urls

@@ -81,7 +81,7 @@ const finalizesingle = () =>
 
    
  
-  <Link to = "/formpage"  value = "Single" onClick = {finalizesingle} className="btn btn-primary btn-lg" >Single Booking</Link>
+  <Link to = "/Form_1"  value = "Single" onClick = {finalizesingle} className="btn btn-primary btn-lg" >Single Booking</Link>
     
 
   
@@ -95,6 +95,7 @@ const finalizesingle = () =>
 
 
 <div id = "c1">
+
 <h1  className = "display-4">Please Kindly indicate How many will be attending below?</h1>
   <hr className="my-4"/>
 
@@ -109,13 +110,13 @@ const finalizesingle = () =>
 
 
 
-  <Link onClick =  {(e) => finalizegroup(e)} to= "/formpage"  className="btn btn-primary btn-lg" >Submit</Link>
+  <Link onClick =  {(e) => finalizegroup(e)} to= "/Form_1"  className="btn btn-primary btn-lg" >Submit</Link>
   
-  <div>
+<br/>
    
     <h6 id = "message"></h6>
     
-  </div>
+  
 
   
 

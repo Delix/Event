@@ -4,7 +4,27 @@
     text-align: center;
 
 .jumbotron
+{  
+
+  .btn-primary
+{ 
+
+   background-color: #fff;
+   color: black;
+    margin-right: 50px;
+    height: 50px;
+    width:auto;
+   
+
+} 
+.btn-primary:hover
 {
+ background-color: #007bff;
+}
+
+
+
+
     hr
     {
         width: 80%;
@@ -30,6 +50,7 @@
 
 #c1
 {
+  margin-top:10px ;
   text-align: center;
   visibility: hidden;
    
@@ -42,8 +63,14 @@
       input[type = number]
       {
         text-align: center;
-        width: 6%;
+        width: auto;
+        height: 50px;
       
+      }
+
+      #message
+      {
+        margin-top: 15px;;
       }
     
 

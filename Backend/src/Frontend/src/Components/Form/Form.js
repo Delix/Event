@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import { sendform } from '../../actions/form';
 
 
+
 function Form(props) 
 {
  
 
-  console.log(props.persons.length);
     Form.proptypes =
     {
   
@@ -27,9 +27,9 @@ function Form(props)
         switch(e.target.name)
 {
 case "title":  
-if(id != props.form.contact.id)
+if(id != -1)
 {
-props.form.persons[id].title = e.target.value;
+props.persons[id].title = e.target.value;
 }
 else
 {
@@ -37,43 +37,40 @@ else
 }
    break;    
 case "phone":
-  if(id != props.form.contact.id)
+  if(id != -1)
   {
-     props.form.persons[id].phone = e.target.value;
+     props.persons[id].phone = e.target.value;
   }
   else
   {
     props.form.contact.phone = e.target.value;
   }
     break;
-case "Lname": 
-
-    props.form.persons[id].lastname = e.target.value  ;   
-    break;       
+     
 case "Fname":
     
-        props.form.persons[id].firstname = e.target.value    ;
+        props.persons[id].name = e.target.value    ;
         break; 
 case "mail":
-  if(id != props.form.contact.id)
+  if(id != -1)
   {
-    console.log("no")
-    props.form.persons[id].email = e.target.value;
+  
+    props.persons[id].email = e.target.value;
   }
 else
 {
 
   props.form.contact.email = e.target.value;
-  console.log(props.form.contact.email);
+  
 }
     break;
 
 case "name":
-  props.contact.name = e.target.value;
+  props.form.contact.name = e.target.value;
   break;
 case "designation":
     
-    props.form.persons[id].designation = e.target.value ;
+    props.persons[id].designation = e.target.value ;
      break; 
 
      case "company":
@@ -96,7 +93,7 @@ case "designation":
            }
            else
            {
-               props.form.company.hear = e.target.value;
+               props.form.Form.hear = e.target.value;
            }
 
        }
@@ -108,7 +105,7 @@ case "designation":
 
         }
         
-            props.form.company.hear = e.target.value;
+            props.form.Form.hear = e.target.value;
     
        }
        
@@ -126,7 +123,7 @@ case "designation":
                 }
                 else
                 {
-                    props.form.company.hear = e.target.value;
+                    props.form.Form.hear = e.target.value;
                 }
      
             }
@@ -138,7 +135,7 @@ case "designation":
                  
              }
              
-                 props.form.company.hear = e.target.value;
+                 props.form.Form.hear = e.target.value;
          
             }
              break; 
@@ -149,10 +146,18 @@ case "designation":
       
     }
 
+  const submitform = (e) =>
+  {
+   
+    props.form.Form.Event = props.event;
+    props.sendform(props.persons,props.form.company,props.form.Form)
+    e.preventDefault();
+  }
+
     
     return (
         <div className = "formContainer">
-          <form>
+          <form onSubmit = {(e) => submitform(e)} >
 <legend>Company information</legend>         
 <div className="card">
       <div className = "card-body">
@@ -184,22 +189,22 @@ case "designation":
 
 <div className = "row">
 <div className="col-4">
-      <input type="text"  onChange = { (e) => attendeesinfo(e,props.form.contact.id) }    className="form-control" name= "Title"placeholder="Title" required/>
+      <input type="text"  onChange = { (e) => attendeesinfo(e,-1) }    className="form-control" name= "Title"placeholder="Title" required/>
     </div>
 
   <div className="col-4">
-      <input type="text"  onChange = { (e) => attendeesinfo(e,props.form.contact.id) }    className="form-control" name= "name"placeholder="Name" required/>
+      <input type="text"  onChange = { (e) => attendeesinfo(e,-1) }    className="form-control" name= "name"placeholder="Full name" required/>
     </div>
 
     <div className="col-4">
-      <input type="email"     onChange = { (e) => attendeesinfo(e,props.form.contact.id) }  className="form-control" name = "mail" placeholder="E-mail" required/>
+      <input type="email"     onChange = { (e) => attendeesinfo(e,-1) }  className="form-control" name = "mail" placeholder="E-mail" required/>
      </div>
 
      </div>
      <br/>
 <div className = "row">
    <div className="col-4">
-      <input type="tel"  onChange = { (e) => attendeesinfo(e,props.form.contact.id) }    className="form-control" name= "Phone"placeholder="Phone" required/>
+      <input type="tel"  onChange = { (e) => attendeesinfo(e,-1) }    className="form-control" name= "Phone"placeholder="Phone" required/>
     </div>
   </div>
 </div>
@@ -227,12 +232,10 @@ case "designation":
     </div>
 
     <div className="col-4">
-      <input type="text"  onChange = { (e) => attendeesinfo(e,person.id) }    className="form-control" name= "Fname"placeholder="First name" required/>
+      <input type="text"  onChange = { (e) => attendeesinfo(e,person.id) }    className="form-control" name= "Fname"placeholder="Full name" required/>
     </div>
 
-    <div className="col-4">
-      <input type="text"     onChange = { (e) => attendeesinfo(e,person.id) }  className="form-control" name = "Lname" placeholder="Last name" required/>
-    </div>
+    
    
     </div>
 
@@ -291,7 +294,7 @@ case "designation":
   
   <div id= "newField1"className="row">
 <div className="col">
-<textarea name = "hear" onChange = {(e) => attendeesinfo(e,0)} placeholder = "please specify" rows = "5" cols = "60" required/>
+<textarea name = "hear" onChange = {(e) => attendeesinfo(e,0)} placeholder = "please specify" rows = "5" cols = "60" />
   </div>
   </div>
 
@@ -315,7 +318,7 @@ case "designation":
   
 <div id= "newField2"className="row">
 <div className="col">
-<textarea name = "previous" onChange = {(e) => attendeesinfo(e,0)} placeholder = "please specify "rows = "5" cols = "60" required/>
+<textarea name = "previous" onChange = {(e) => attendeesinfo(e,0)} placeholder = "please specify "rows = "5" cols = "60" />
   </div>
   </div>
 
