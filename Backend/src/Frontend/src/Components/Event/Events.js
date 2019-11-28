@@ -29,9 +29,9 @@ function Events(props)
 
   }
 
-  const SendtoState = () =>
+  const SendtoState = (id) =>
   {
-      props.getevent(props.divevents);
+      props.getevent(id);
    
   }
   
@@ -52,7 +52,7 @@ function Events(props)
         <ul className="list-group list-group-flush">
         <li className="list-group-item">{ event.date }</li>
         <li className="list-group-item">{event.location }</li>
-        <li className = "list-group-item"><Link to = "/form" onClick = {SendtoState}   className="btn btn-primary">RSVP</Link>
+        <li className = "list-group-item"><Link to = "/form" onClick = {SendtoState(event.id)}   className="btn btn-primary">RSVP</Link>
          <a onClick = {moreinfo }  className="btn btn-primary" >Learn more</a>
          </li>
         </ul> 

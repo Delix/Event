@@ -18,4 +18,8 @@ export const DELETE_FORM = 'DELETE_FORM'
 export const EDIT_FORM = 'EDIT_FORM'
 
 export const GET_NO = 'GET_NO';
+export const GET_COMPANY = 'GET_COMPANY';
 export const POST_SEND = 'POST_SEND';
+export const POST_ATTENDEE = 'POST_ATTENDEE';
+export const POST_COMPANY = 'POST_COMPANY';
+export const POST_CONTACT = 'POST_CONTACT';

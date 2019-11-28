@@ -1,6 +1,17 @@
 import axios from 'axios'
-import { GET_NO,POST_SEND} from './types';
+import { GET_COMPANY,GET_NO,POST_SEND,POST_ATTENDEE,POST_COMPANY,POST_CONTACT} from './types';
 
+
+export const getcompany = () => dispatch => {
+    axios.get('/api/company')
+    .then(res => {
+        dispatch({
+            type : GET_COMPANY,
+            payload:res.data
+        
+        });
+    }).catch(err => console.log(err));
+}
 
 
 export const getnumber = (number) => dispatch=>
@@ -8,17 +19,16 @@ export const getnumber = (number) => dispatch=>
      let persons = [];
         while(persons.length < number)
        { 
-    let person =  {
-        id: persons.length,
+     
+
+    let person =  { id: persons.length,attendee : {
         title:"",
         name:"",
         designation:"",
         email:"",
-        phone:"",
-        date:"",
-        Company:""
-        };
-         persons.push(person);
+        phone:""
+      }};
+     persons.push(person);
        
         }
     
@@ -30,22 +40,60 @@ export const getnumber = (number) => dispatch=>
     });
 }
 
-
-
-
-export const sendform = (person,company,form)  => dispatch =>
-{  let forms =[];
-  
-    if(person.length > 1)
-    {
-        while(person.length >= forms.length)
+export const createContact = (contact) => dispatch =>
+{
+    console.log(contact);
+    axios.post('/api/contact/', contact).then(
+        res =>
         {
-           forms.push(form)
+          dispatch({
+              type: POST_CONTACT,
+              payload:res.data
+          });
+          }).catch(err => console.log(err));
 
-        }
-        let application = [person,company,forms];
+    
+}
+
+export const createCompany = (company) => dispatch =>
+{
+    console.log(company)
+    axios.post('/api/company/',company).then(
+        res =>
+        {
+          dispatch({
+              type: POST_COMPANY,
+              payload:res.data
+          });
+          }).catch(err => console.log(err));
+
+    
+}
+export const createAttendee = (Attendee) => dispatch =>
+{
+    let Attendees = [];
+    Attendee.map(Attendee =>{
+          
+        const {title,name,designation,email,phone} = Attendee.attendee;
+        const  attend =  {title,name, designation,email,phone}
+        Attendees.push(attend)
+      });
+   
+     
+    axios.post("/api/attendee/",Attendees).then(
+        res =>
+        {
+          dispatch({
+              type: POST_ATTENDEE,
+              payload:res.data
+          });
+          }).catch(err => console.log(err));
+    
+}
+export const sendform = (form)  => dispatch =>
+{ 
       
-        axios.post('/api/Form/',application).then(
+        axios.post('/api/Form/',form).then(
             res =>
             {
               dispatch({
@@ -53,23 +101,6 @@ export const sendform = (person,company,form)  => dispatch =>
                   payload:res.data
               });
               }).catch(err => console.log(err));
-
-    }
-    else
-    {
-        forms.push(form)
-        let application = [person,company,forms];
-        console.log(application);
-        axios.post("api/Form",application).then(
-            res =>
-            {
-              dispatch({
-                  type: POST_SEND,
-                  payload:res.data
-              });
-              }).catch(err => console.log(err));
-
-    }
 
  
  

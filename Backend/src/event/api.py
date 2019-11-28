@@ -3,8 +3,8 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from django.http import Http404
-from event.models import Division,Contactus,Event,TermsCondition,Social,Event_Form
-from .Serializers import DivisionSerializer,ContactusSerializer,EventSerializer,TermConditionSerializer,SocialSerializer,Event_FormSerializer
+from event.models import Division,Contactus,Event,TermsCondition,Social,Event_Form,Company,Contact,Attendee
+from .Serializers import DivisionSerializer,ContactusSerializer,EventSerializer,TermConditionSerializer,SocialSerializer,Event_FormSerializer,CompanySerializer,ContactSerializer,AttendeeSerializer
 
 
    
@@ -46,3 +46,20 @@ class Event_FormViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.AllowAny]
     serializer_class = Event_FormSerializer
+
+class ContactViewSet(viewsets.ModelViewSet):
+    queryset = Contact.objects.all()
+    permission_classes = [
+        permissions.AllowAny]
+    serializer_class = ContactSerializer
+
+class AttendeeViewSet(viewsets.ModelViewSet):
+    queryset = Attendee.objects.all()
+    permission_classes = [
+        permissions.AllowAny]
+    serializer_class = AttendeeSerializer
+class CompanyViewSet(viewsets.ModelViewSet):
+    queryset = Company.objects.all()
+    permission_classes = [
+        permissions.AllowAny]
+    serializer_class = CompanySerializer
