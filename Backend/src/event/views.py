@@ -115,17 +115,50 @@ class ListForm(APIView):
     
      permission_classes = [permissions.AllowAny]
      
+    
+     def get_Form(request, pk):
+         try:
+              return Event_Form.objects.get(pk=pk)
+         except Event_Form.DoesNotExist:
+             return Response(status=status.HTTP_404_NOT_FOUND)
+         
      def get(self, request):
         form = Event_Form.objects.all()
-        serializer = Event_FormSerializer(company,many = True)
+        serializer = Event_FormSerializer(form,many = True)
         return Response(serializer.data)  
 
-     def post(self, request):
-         serializer = Event_FormSerializer(data =request.data,many =True)
+     def post(self, request,pk):
+         print(request.data["Form"])
+         if request.data["Form"].get('isComplete')== False:
+             serializer = Event_FormSerializer(data = request.data["Form"])
+             if serializer.is_valid():
+                 serializer.save()
+                 return Response(serializer.data, status=status.HTTP_201_CREATED)
+             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+         else:
+             companySerializer = CompanySerializer(data = request.data['company'])
+             contactSerializer = ContactSerializer(data = request.data['contact'])
+             attendeeSerializer =AttendeeSerializer(data = request.data['attendees'],many = True)
+             if not companySerializer.is_valid():
+                 return Response(companySerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+             if not contactSerializer.is_valid():
+                 return Response(contactSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+             if not attendeeSerializer.is_valid():
+                 return Response(attendeeSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+         
+         companySerializer.save()
+         contactSerializer.save()
+         attendeeSerializer.save()
+         form = self.get_Form(pk)
+         serializer = Event_FormSerializer(form, data=request.data['Form'])
          if serializer.is_valid():
              serializer.save()
-             return Response(serializer.data, status=status.HTTP_201_CREATED)
-         return Response(cserializer.errors, status=status.HTTP_400_BAD_REQUEST)
+             return Response(serializer.data,status=status.HTTP_201_CREATED)
+         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+      
+
 
 
          

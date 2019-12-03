@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Form from "./Form"
 import { getTerm} from "../../actions/term"
-import { getcompany } from '../../actions/form';
+import {postform } from "../../actions/form";
+
 
 
 class MainForm extends Component 
@@ -13,8 +14,9 @@ class MainForm extends Component
         super();
         this.state = {
             company : {
-                company:"",
-                sector:""
+                name:"",
+                sector:"",
+                form:""
             },
             dropdown: ["Facebook","Twitter","Empowaworx Website","Word of Mouth","Print Media","Other"],
             contact :  {
@@ -22,20 +24,14 @@ class MainForm extends Component
                 title:"",
                 name:"",
                 phone:"",
-                email:""
+                email:"",
+                form:""
                },
             Form: { 
             previous :"No",
             hear: "Facebook",
             event:"",
-           attendee:"",
-           company:"",
-           contact:""
-           
-          
-        
-       
-
+            isComplete:false
             }
                                
         };
@@ -50,7 +46,9 @@ class MainForm extends Component
 componentDidMount()
 {
     this.props.getTerm();
-    this.props.getcompany();
+    const {previous,hear,event,isComplete} = this.state.Form;
+    const Form =  {previous,hear,event,isComplete}
+    this.props.postform(Form)
     
     
 
@@ -59,6 +57,7 @@ componentDidMount()
 static Proptypes = {
     
     getTerm:PropTypes.func.isRequired,
+    postForm:PropTypes.func.isRequired,
     getcompany:PropTypes.func.isRequired,
 
 
@@ -90,4 +89,4 @@ static Proptypes = {
 
 
 
-export default connect(null,{  getTerm,getcompany })(MainForm)
+export default connect(null,{  getTerm,postform})(MainForm)

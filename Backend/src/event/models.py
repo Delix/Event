@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here. need work on date and def
-
 class Division(models.Model):
     name = models.CharField(max_length = 250)
     image = models.CharField(max_length = 250)
@@ -10,7 +9,6 @@ class Division(models.Model):
     def __str__(self):
         return self.name
  
-
 class Event(models.Model):
     name = models.CharField(max_length = 250)
     location = models.CharField(max_length = 250)
@@ -20,12 +18,20 @@ class Event(models.Model):
     def __str__(self):
         return self.name
 
-class  Company(models.Model):
-      company = models.CharField(max_length = 250)
-      sector = models.CharField(max_length = 250)
+class Event_Form(models.Model):
+        previous = models.TextField(blank = True,null = True)
+        hear = models.TextField(blank = True,null = True)
+        date = models.DateTimeField(auto_now_add=True )
+        event =  models.ForeignKey(Event,on_delete = models.CASCADE,blank = True,null = True)
+        isComplete = models.BooleanField()
+        
 
-      def __str__(self):
-          return self.company
+class  Company(models.Model):
+       name = models.CharField(max_length = 250)
+       sector = models.CharField(max_length = 250)
+       form = models.ForeignKey(Event_Form,related_name = 'company',on_delete = models.CASCADE,blank = True,null = True)
+       def __str__(self):
+          return self.name
 
 class  Attendee(models.Model):
       title = models.CharField(max_length = 4)
@@ -33,31 +39,22 @@ class  Attendee(models.Model):
       designation = models.CharField(max_length = 250)
       email = models.EmailField(max_length=70)
       phone = models.CharField(max_length = 250,blank = True)
+      form = models.ForeignKey(Event_Form,related_name = 'attendees',on_delete = models.CASCADE,blank = True,null = True)
   
        
       def __str__(self):
           return self.name
 
 class  Contact(models.Model):
-      title = models.CharField(max_length = 4,blank = True)
-      name = models.CharField(max_length = 250,blank = True)
-      phone = models.CharField(max_length = 250,blank = True)
-      email = models.EmailField(max_length=70,blank = True)
-
+      title = models.CharField(max_length = 4)
+      name = models.CharField(max_length = 250)
+      phone = models.CharField(max_length = 250)
+      email = models.EmailField(max_length=70)
+      form = models.ForeignKey(Event_Form,related_name = 'contact',blank = True,on_delete = models.CASCADE,null = True)
+    
       def __str__(self):
           return self.name  
 
-class Event_Form(models.Model):
-        previous = models.TextField()
-        hear = models.TextField()
-        date = models.DateTimeField(auto_now_add=True)
-        event =  models.ForeignKey(Event,on_delete = models.CASCADE)
-        attendee = models.ForeignKey(Attendee,related_name = 'attendees',on_delete = models.CASCADE)
-        company = models.ForeignKey(Company,on_delete = models.CASCADE)
-        contact = models.ForeignKey(Contact,on_delete = models.CASCADE)
-      
-       
-    
      
 class Social(models.Model):
         name = models.CharField(max_length = 250)
@@ -71,7 +68,7 @@ class Contactus(models.Model):
           email = models.EmailField(max_length=70,default = 'info@empowaworx.co.za')
 
 class TermsCondition(models.Model):
-          name =  models.TextField()
-          description = models.TextField()
-          def __str__(self):
-             return self.name
+        name =  models.TextField()
+        description = models.TextField()
+        def __str__(self):
+              return self.name

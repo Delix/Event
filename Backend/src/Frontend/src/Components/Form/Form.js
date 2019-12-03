@@ -2,12 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import "../CSS/form_style.scss"
 import PropTypes from 'prop-types';
-import {sendform,createAttendee,createCompany,createContact} from '../../actions/form';
+import {sendform} from '../../actions/form';
 
 
 
 function Form(props) 
 {
+ 
  
 
     Form.proptypes =
@@ -19,11 +20,8 @@ function Form(props)
     sendform: PropTypes.func.isRequired,
     event: PropTypes.number.isRequired,
     terms: PropTypes.array.isRequired,
-    persons: PropTypes.array.isRequired,
-    attendees:PropTypes.array.isRequired,
-    company:PropTypes.number.isRequired,
-    contact:PropTypes.number.isRequired,
-    companies:PropTypes.array.isRequired,
+    Form:PropTypes.number.isRequired,
+
   
     };
 
@@ -84,7 +82,7 @@ case "Designation":
 
      case "company":
     
-    props.form.company.company = e.target.value ;
+    props.form.company.name = e.target.value ;
      break; 
      case "sector":
     
@@ -158,54 +156,54 @@ case "Designation":
   const submitform = (e) =>
   {
     e.preventDefault();
-    props.Companies.map(company =>{
-      if(company.company.toUpperCase().includes(props.form.company.company.toUpperCase()))
-      {
-         return props.form.Form.company = company.id
-      }
+     
+    
+    props.form.Form.event = props.event ;
+    props.form.contact.form = props.Form.id;
+    props.form.company.form = props.Form.id;
+    props.form.Form.isComplete  = true;
 
-    });
-   
-    if(props.form.Form.company == "")
+
+    if(props.persons.length == 1)
     {
-        const {company,sector} = props.form.company;
-        const Company = {company,sector};
-        props.createCompany(Company);
+      props.form.contact.title = props.persons[0].attendee.title;
+      props.form.contact.name = props.persons[0].attendee.name;
+      props.form.contact.email = props.persons[0].attendee.email;
+      props.form.contact.phone = props.persons[0].attendee.phone;
+  
     }
     
+    let {title,name,phone,email,form} = props.form.contact;
+    const contact =  {title,name,phone,email,form}
+
+    let temp = []
+    props.persons.map( person =>
+      {
+        person.attendee.form = props.Form.id
+        let {title,name,designation,email,phone,form} = person.attendee;
+        temp.push({title,name,designation,email,phone,form});
   
-    if(props.persons.length === 1)
-    {
-     
-     
-      props.form.contact.title= props.persons[0].attendee.title;
-      props.form.contact.name= props.persons[0].attendee.name;
-      props.form.contact.email= props.persons[0].attendee.email;
-      props.form.contact.phone = props.persons[0].attendee.phone;
-      const {title,name,email,phone} = props.form.contact;
-      const contact =  {title,name,email,phone}
-      props.createContact(contact);
-    }
-    else
-    {
-      const {title,name,email,phone} = props.form.contact;
-      const contact =  {title,name,email,phone}
-      props.createContact(contact);
-    }
-     props.createAttendee(props.persons);
-     props.form.Form.company =  props.company.id;
-     props.form.Form.attendee = props.attendees.id;
-     props.form.Form.event = props.esvent;
-     props.form.Form.contact=  props.contact.id;
-        console.log(props.form.Form);
-   // props.sendform(props.form.Form)
+      }
+    );
+    const attendees = temp
+    const company = props.form.company;
+  
+
+        
+    const {previous,hear,event,isComplete} = props.form.Form;
+    const Form =  {previous,hear,event,isComplete}
+    const application = {Form,attendees,contact,company};
+
+    console.log(application)
+   props.sendform(application,props.Form.id);
+  
   
   }
 
     
     return (
         <div className = "formContainer">
-          <form autocomplete="off"  onSubmit = {(e) => submitform(e)} >
+          <form autoComplete="off"  onSubmit = {(e) => submitform(e)} >
 <legend>Company information</legend>         
 <div className="card">
       <div className = "card-body">
@@ -404,14 +402,12 @@ const mapStateToProps = state => ({
     persons: state.form.persons,
     event: state.event.Event,
     terms: state.term.terms,
-    company: state.form.Company,
-    contact: state.form.contact,
-    attendees: state.form.persons,
-    Companies:state.form.companies
+    Form: state.form.FormID,
+  
 
 
 });
 
 
-export default connect(mapStateToProps,{sendform,createAttendee,createCompany,createContact})(Form)
+export default connect(mapStateToProps,{sendform})(Form)
 

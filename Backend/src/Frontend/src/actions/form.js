@@ -1,19 +1,5 @@
 import axios from 'axios'
-import { GET_COMPANY,GET_NO,POST_SEND,POST_ATTENDEE,POST_COMPANY,POST_CONTACT} from './types';
-
-
-export const getcompany = () => dispatch => {
-    axios.get('/api/company')
-    .then(res => {
-        dispatch({
-            type : GET_COMPANY,
-            payload:res.data
-        
-        });
-    }).catch(err => console.log(err));
-}
-
-
+import { GET_NO,POST_FORM, POST_DETAIL} from './types';
 export const getnumber = (number) => dispatch=>
 {
      let persons = [];
@@ -26,7 +12,8 @@ export const getnumber = (number) => dispatch=>
         name:"",
         designation:"",
         email:"",
-        phone:""
+        phone:"",
+        form:"",
       }};
      persons.push(person);
        
@@ -40,64 +27,14 @@ export const getnumber = (number) => dispatch=>
     });
 }
 
-export const createContact = (contact) => dispatch =>
-{
-    console.log(contact);
-    axios.post('/api/contact/', contact).then(
-        res =>
-        {
-          dispatch({
-              type: POST_CONTACT,
-              payload:res.data
-          });
-          }).catch(err => console.log(err));
-
-    
-}
-
-export const createCompany = (company) => dispatch =>
-{
-    console.log(company)
-    axios.post('/api/company/',company).then(
-        res =>
-        {
-          dispatch({
-              type: POST_COMPANY,
-              payload:res.data
-          });
-          }).catch(err => console.log(err));
-
-    
-}
-export const createAttendee = (Attendee) => dispatch =>
-{
-    let Attendees = [];
-    Attendee.map(Attendee =>{
-          
-        const {title,name,designation,email,phone} = Attendee.attendee;
-        const  attend =  {title,name, designation,email,phone}
-        Attendees.push(attend)
-      });
-   
-     
-    axios.post("/api/attendee/",Attendees).then(
-        res =>
-        {
-          dispatch({
-              type: POST_ATTENDEE,
-              payload:res.data
-          });
-          }).catch(err => console.log(err));
-    
-}
-export const sendform = (form)  => dispatch =>
+export const sendform = (Form,pk)  => dispatch =>
 { 
-      
-        axios.post('/api/Form/',form).then(
+  
+        axios.post('/api/Form/'+pk+'/',Form).then(
             res =>
             {
               dispatch({
-                  type: POST_SEND,
+                  type: POST_DETAIL,
                   payload:res.data
               });
               }).catch(err => console.log(err));
@@ -105,6 +42,25 @@ export const sendform = (form)  => dispatch =>
  
  
 
+    
+}
+
+export const postform = (Form)  => dispatch =>
+{ 
+    
+    const form =  {Form};
+  console.log(Form);
+        axios.post('/api/Form/0/',form).then(
+            res =>
+            {
+              dispatch({
+                  type: POST_FORM,
+                  payload:res.data
+              });
+              }).catch(err => console.log(err));
+
+ 
+ 
     
 }
 
