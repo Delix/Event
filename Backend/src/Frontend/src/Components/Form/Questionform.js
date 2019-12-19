@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import '../CSS/qform_style.scss';
+import '../../Styles/CSS/qform_style.scss';
 import { getnumber } from "../../actions/form";
 
 

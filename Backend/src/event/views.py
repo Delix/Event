@@ -3,8 +3,9 @@ from rest_framework.response import Response
 from rest_framework import status,permissions
 from django.http import Http404
 from rest_framework import status,authentication,permissions
-from event.models import Division,Contact,Contactus,Event,Company,Event_Form,Attendee,TermsCondition,Social
-from .Serializers import AttendeeSerializer,ContactSerializer,Event_FormSerializer,CompanySerializer,DivisionSerializer,ContactusSerializer,EventSerializer,TermConditionSerializer,SocialSerializer
+from event.models import Division,Event,Company,Event_Form,Attendee
+from .Serializers import FormSerializer,Form_AttendeeSerializer,Event_FormSerializer,Form_CompanySerializer,DivisionSerializer,EventSerializer
+from accounts.Serializer import Form_ContactSerializer
 
 
 class DivisionList(APIView):
@@ -27,37 +28,6 @@ class EventList(APIView):
         serializer = EventSerializer(event,many = True)
         return Response(serializer.data)  
 
-        
-   
-class TermList(APIView):
-     
-    permission_classes = [permissions.AllowAny]
-
-    def get(self, request):
-        term = TermsCondition.objects.all()
-        serializer = TermConditionSerializer(term,many = True)
-        return Response(serializer.data)  
-
-        
-class ContactusList(APIView):
-     
-    permission_classes = [permissions.AllowAny]
-
-    def get(self, request):
-        contact = Contactus.objects.all()
-        serializer = ContactusSerializer(term,many = True)
-        return Response(serializer.data)  
-
-class SocialList(APIView):
-     
-     permission_classes = [permissions.AllowAny]
-
-     def get(self, request):
-        social = Social.objects.all()
-        serializer = SocialSerializer(social,many = True)
-        return Response(serializer.data)  
-
-
 
 class ListCompany(APIView):
         
@@ -77,20 +47,6 @@ class ListCompany(APIView):
                
  
      
-
-class ListContact(APIView):
-     permission_classes = [permissions.AllowAny]
-     def get(self, request):
-          company = Contact.objects.all()
-          serializer = ContactSerializer(company,many = True)
-          return Response(serializer.data)  
-
-     def post(self, request):
-             Serializer = ContactSerializer(data = request.data)
-             if Serializer.is_valid():
-                 Serializer.save()
-                 return Response(Serializer.data, status=status.HTTP_201_CREATED)
-             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ListAttendee(APIView):
@@ -116,9 +72,12 @@ class ListForm(APIView):
      permission_classes = [permissions.AllowAny]
      
     
+    # def Checkcontact(request,contact)
+          #try:
+
      def get_Form(request, pk):
          try:
-              return Event_Form.objects.get(pk=pk)
+              return Event_Form.objects.get(id= pk)
          except Event_Form.DoesNotExist:
              return Response(status=status.HTTP_404_NOT_FOUND)
          
@@ -128,32 +87,33 @@ class ListForm(APIView):
         return Response(serializer.data)  
 
      def post(self, request,pk):
-         print(request.data["Form"])
+         print(pk)
          if request.data["Form"].get('isComplete')== False:
-             serializer = Event_FormSerializer(data = request.data["Form"])
+             serializer = FormSerializer(data = request.data["Form"])
              if serializer.is_valid():
                  serializer.save()
                  return Response(serializer.data, status=status.HTTP_201_CREATED)
              return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
          else:
-             companySerializer = CompanySerializer(data = request.data['company'])
-             contactSerializer = ContactSerializer(data = request.data['contact'])
-             attendeeSerializer =AttendeeSerializer(data = request.data['attendees'],many = True)
+             companySerializer = Form_CompanySerializer(data = request.data['company'])
+             contactSerializer = Form_ContactSerializer(data = request.data['contact'])
+             attendeeSerializer =Form_AttendeeSerializer(data = request.data['attendees'],many = True)
              if not companySerializer.is_valid():
                  return Response(companySerializer.errors, status=status.HTTP_400_BAD_REQUEST)
              if not contactSerializer.is_valid():
                  return Response(contactSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
              if not attendeeSerializer.is_valid():
                  return Response(attendeeSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
-         
-         companySerializer.save()
-         contactSerializer.save()
-         attendeeSerializer.save()
+        
          form = self.get_Form(pk)
-         serializer = Event_FormSerializer(form, data=request.data['Form'])
+         serializer = FormSerializer(form, data=request.data['Form'])
          if serializer.is_valid():
              serializer.save()
+             companySerializer.save()
+         
+             contactSerializer.save()
+             attendeeSerializer.save()
              return Response(serializer.data,status=status.HTTP_201_CREATED)
          return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

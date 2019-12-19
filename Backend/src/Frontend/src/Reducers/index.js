@@ -5,6 +5,7 @@ import contact from './contact';
 import form from './form';
 import term from './term';
 import social from './social';
+import auth from './auth'
 
 
 export default  combineReducers ({
@@ -14,6 +15,7 @@ export default  combineReducers ({
     contact,
     form,
     term,
-    social
+    social,
+    auth
 
 });

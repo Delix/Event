@@ -14,24 +14,24 @@ class MainForm extends Component
         super();
         this.state = {
             company : {
-                name:"",
-                sector:"",
-                form:""
+                name:null,
+                sector:null,
+                form:null
             },
             dropdown: ["Facebook","Twitter","Empowaworx Website","Word of Mouth","Print Media","Other"],
             contact :  {
         
-                title:"",
-                name:"",
-                phone:"",
-                email:"",
-                form:""
+                title:null,
+                name:null,
+                phone:null,
+                email:null,
+                form:null
                },
             Form: { 
             previous :"No",
             hear: "Facebook",
-            event:"",
-            isComplete:false
+            event:null,
+            isComplete:false,
             }
                                
         };

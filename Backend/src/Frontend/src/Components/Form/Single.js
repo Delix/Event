@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import "../CSS/form_style.scss"
+import "../../Styles/CSS/form_style.scss"
 import PropTypes from 'prop-types';
 import { sendform } from '../../actions/form';
 

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react'
-import '../CSS/f_style.scss';
+import '../../Styles/CSS/f_style.scss';
 import { connect } from 'react-redux';
 import { getcon }  from '../../actions/contact';
 import { getsocial } from '../../actions/social';

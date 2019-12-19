@@ -3,7 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from django.http import Http404
-from event.models import Division,Contactus,Event,TermsCondition,Social,Event_Form,Company,Contact,Attendee
+from event.models import Division,Contactus,Event,TermsCondition,Social,Event_Form,Company,Attendee
 from .Serializers import DivisionSerializer,ContactusSerializer,EventSerializer,TermConditionSerializer,SocialSerializer,Event_FormSerializer,CompanySerializer,ContactSerializer,AttendeeSerializer
 
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Event from './Events';
 import MiniDivison from './MiniDivision';
-import '../CSS/minie_style.scss'
+import '../../Styles/CSS/minie_style.scss'
 
 export default class MainEvent extends Component {
     render() {

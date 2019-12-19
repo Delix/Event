@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react'
-import './CSS/home_style.scss';
+import '../Styles/CSS/home_style.scss';
 import { connect } from 'react-redux';
 import {
   Link
