@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {AUTH_FAIL,AUTH_LOGOUT,AUTH_START, AUTH_SUCCESS} from './types'
+import {AUTH_FAIL,AUTH_LOGOUT,AUTH_START, AUTH_SUCCESS,GET_FORMS} from './types'
 
 
 export const checkAuthtoken = expireTime => 
@@ -52,6 +52,8 @@ export const  authsuccess =  token => dispatch => {
             payload:token
         }
     )
+
+    getforms(token);
   
 }
 
@@ -81,17 +83,29 @@ export const authlogout = () => dispatch => {
   
 }
 
+export const getforms = (token) => dispatch => {
+   
+   
+    dispatch(
+        {
+          type:GET_FORMS
+        }
+    )
+  
+}
 
-export const authlogin = Login => dispatch =>
+
+
+export const authlogin = Login =>
  {
     authstart(); 
-    axios.post('/api/Contact',login)
+    axios.post('/api/Contact',Login)
     .then(res => {
             const token = res.data.key;
             const ExpireTime = new Date(new Date().getTime() + 3600);
             localStorage.setItem('token',token);
             localStorage.setItem('ExpireTime',ExpireTime);    
-            AUTH_SUCCESS(token)
+            authsuccess(token)
             checkAuthtoken(3600);
     }).catch(err => console.log(err));
 }

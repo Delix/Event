@@ -21,8 +21,8 @@ class App extends Component
 {
 
  static proptypes = {
-    isAuthenticated:PropTypes.bool.isRequired,
-    Autosignup:PropTypes.func.isRequired
+    isAuthenticated:PropTypes.bool.isRequired
+    //Autosignup:PropTypes.func.isRequired
 };  
 
 componentDidMount()

@@ -1,10 +1,10 @@
-import {AUTH_FAIL,AUTH_LOGIN,AUTH_LOGOUT,AUTH_START, AUTH_SUCCESS} from '../actions/types'
+import {AUTH_FAIL,AUTH_LOGOUT,AUTH_START, AUTH_SUCCESS} from '../actions/types'
 import {updateObject} from '../Utili'
 
 const initialState = {
   error:null,
-   token: null,
-    loading:false
+  token: null,
+  loading:false
 }
 
 export default function(state = initialState,action ){

@@ -81,8 +81,8 @@ class ListForm(APIView):
          except Event_Form.DoesNotExist:
              return Response(status=status.HTTP_404_NOT_FOUND)
          
-     def get(self, request):
-        form = Event_Form.objects.all()
+     def get(self, request,pk):
+        form = Event_Form.objects.get(Creator = pk)
         serializer = Event_FormSerializer(form,many = True)
         return Response(serializer.data)  
 

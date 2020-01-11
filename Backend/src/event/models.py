@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import User
 
 
 # Create your models here. need work on date and def
@@ -25,9 +26,7 @@ class Event_Form(models.Model):
         hear = models.TextField(blank = True,null = True)
         date = models.DateTimeField(auto_now_add=True )
         event =  models.ForeignKey(Event,on_delete = models.CASCADE,blank = True,null = True)
-        #generate unique serial9
-        isComplete = models.BooleanField()
-       # Creator = models.ForeignKey(User,related_name = 'contact',blank = True,on_delete = models.CASCADE,null = True)
+        Creator = models.ForeignKey(User,related_name = 'user',blank = True,on_delete = models.CASCADE,null = True)
     
 
 class  Attendee(models.Model):

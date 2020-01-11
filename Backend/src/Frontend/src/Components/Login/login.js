@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import '../../Styles/CSS/login.scss';
 import {authlogin} from '../../actions/auth'
 import { connect } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
  class login extends Component {
 
@@ -11,7 +12,7 @@ import { connect } from 'react-redux';
     error:PropTypes.array.isRequired,
     authlogin:PropTypes.func.isRequired
  };  
- //this.props.history.push('/')
+
 
     render() {
          
@@ -20,7 +21,10 @@ import { connect } from 'react-redux';
       {
       errormsg = (<p>{this.props.error.msg}</p>);
       }
-         
+      if(!this.props.error)
+      {
+        history.push("/");
+      }  
         return (
             <div className = "Logincontianer">
            <div className = "card">
@@ -72,6 +76,7 @@ import { connect } from 'react-redux';
 const mapStateToProps = state => ({
    isloading: state.auth.loading,
    error: state.auth.error
+
  
  });
  

@@ -1,11 +1,12 @@
-import {GET_NO,POST_FORM,POST_DETAIL} from '../actions/types.js';
+import {GET_NO,POST_FORM,POST_DETAIL,GET_FORMS} from '../actions/types.js';
 
 
 const initialState = {
     FormID :"",
     persons: [],
     Status:"" ,
-    Form:""
+    Form:"",
+    Forms:,
 }
 
 export default function(state = initialState,action ){
@@ -28,7 +29,12 @@ export default function(state = initialState,action ){
               ...state,
               Form:action.payload
             }
-      
+            case GET_FORMS:
+              return {
+                ...state,
+                Form:action.payload
+              }
+        
         default:
             return state;
 

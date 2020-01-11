@@ -47,6 +47,10 @@ class User(AbstractBaseUser):
      def has_module_perms(self,app_label):
          return True
 
+     def email_user(self, subject, message, from_email=None, **kwargs):
+         
+        send_mail(subject, message, from_email, [self.email], **kwargs)
+
      @property
      def is_staff(self):
          return self.staff

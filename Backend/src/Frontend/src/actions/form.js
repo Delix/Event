@@ -48,7 +48,7 @@ export const sendform = (Form,pk)  => dispatch =>
 export const postform = (Form)  => dispatch =>
 { 
     
-    const form =  {Form};
+ const form =  {Form};
   console.log(Form);
         axios.post('/api/Form/0/',form).then(
             res =>

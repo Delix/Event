@@ -33,27 +33,21 @@ class FormSerializer(serializers.ModelSerializer):
      class Meta:
          model = Event_Form
          #need to fill it in
-         fields = ['id','previous','hear','event','isComplete']
+         fields = ['id','previous','hear','event']
      
   
 
 
 class Event_FormSerializer(serializers.ModelSerializer):
      attendees = serializers.PrimaryKeyRelatedField(many = True, read_only = True)
+     company = serializers.IntegerField()
+     
     
      class Meta:
         model = Event_Form
          #need to fill it in
-        fields = ['id','previous','hear','event','isComplete','attendees']
+        fields = ['id','previous','hear','event','attendees','company']
 
-   
-class FormSerializer(serializers.ModelSerializer):
-   
-     class Meta:
-        model = Event_Form
-         #need to fill it in
-        fields = ['id','previous','hear','event','isComplete']
-    
    
 
 class Form_AttendeeSerializer(serializers.ModelSerializer):
