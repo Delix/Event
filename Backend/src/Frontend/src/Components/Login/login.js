@@ -21,7 +21,7 @@ import { useHistory } from "react-router-dom";
       {
       errormsg = (<p>{this.props.error.msg}</p>);
       }
-      if(!this.props.error)
+     if(!this.props.error)
       {
         history.push("/");
       }  

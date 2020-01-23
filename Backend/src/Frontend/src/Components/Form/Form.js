@@ -19,8 +19,7 @@ function Form(props)
      createContact:PropTypes.func.isRequired,
     sendform: PropTypes.func.isRequired,
     event: PropTypes.number.isRequired,
-    terms: PropTypes.array.isRequired,
-    Form:PropTypes.number.isRequired,
+    terms: PropTypes.array.isRequired
 
   
     };
@@ -67,7 +66,7 @@ case "mail":
 else
 {
 
-  props.form.contact.email = e.target.value;
+  props.form.contact.user = e.target.value;
   
 }
     break;
@@ -157,45 +156,43 @@ case "Designation":
   {
     e.preventDefault();
      
-    
+    const company = props.form.company;
+    props.form.Form.company = company;
     props.form.Form.event = props.event ;
-    props.form.contact.form = props.Form.id;
-    props.form.company.form = props.Form.id;
-    props.form.Form.isComplete  = true;
+  
+    
 
 
     if(props.persons.length == 1)
     {
       props.form.contact.title = props.persons[0].attendee.title;
+      props.form.contact.user = props.persons[0].attendee.email;
       props.form.contact.name = props.persons[0].attendee.name;
-      props.form.contact.email = props.persons[0].attendee.email;
       props.form.contact.phone = props.persons[0].attendee.phone;
-  
+   
     }
+ 
+   
     
-    let {title,name,phone,email,form} = props.form.contact;
-    const contact =  {title,name,phone,email,form}
+     
+    let {title,name,phone,user} = props.form.contact;
+    const contact =  {title,name,phone,user}
 
     let temp = []
     props.persons.map( person =>
       {
-        person.attendee.form = props.Form.id
-        let {title,name,designation,email,phone,form} = person.attendee;
-        temp.push({title,name,designation,email,phone,form});
+        
+        let {title,name,designation,email,phone} = person.attendee;
+        temp.push({title,name,designation,email,phone});
   
       }
     );
-    const attendees = temp
-    const company = props.form.company;
-  
+    props.form.Form.attendees = temp
+    const {previous,hear,event,attendees} = props.form.Form;
+    const Form =  {previous,hear,event,company,creator,attendees}
+    const application = {Form,contact};
 
-        
-    const {previous,hear,event,isComplete} = props.form.Form;
-    const Form =  {previous,hear,event,isComplete}
-    const application = {Form,attendees,contact,company};
-
-    console.log(application)
-   props.sendform(application,props.Form.id);
+   props.sendform(application);
   
   
   }
@@ -401,8 +398,7 @@ case "Designation":
 const mapStateToProps = state => ({
     persons: state.form.persons,
     event: state.event.Event,
-    terms: state.term.terms,
-    Form: state.form.FormID,
+    terms: state.term.terms
   
 
 

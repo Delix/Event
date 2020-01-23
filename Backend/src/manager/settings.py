@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from datetime import timedelta
+from rest_framework.settings import api_settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+
+
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -73,6 +78,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'manager.wsgi.application'
 
+#sendgrid settings
+
+#SEND_GRID_API_KEY = ""
+
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -80,7 +89,7 @@ WSGI_APPLICATION = 'manager.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'eventmanager',
+        'NAME': 'event4',
         'USER': 'delix',
         'PASSWORD': 'sbuage34',
         'HOST': '127.0.0.1',
@@ -131,10 +140,11 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ],
+   # 'DEFAULT_PERMISSION_CLASSES': [
+    #    'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    #],
     'DEFAULT_AUTHENTICATION_CLASSES':
-    ['knox.auth.TokenAuthentication']
+    ['knox.auth.TokenAuthentication'],
+
 
 }

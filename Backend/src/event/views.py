@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status,permissions
+
+from django.contrib.auth import get_user_model
 from django.http import Http404
 from rest_framework import status,authentication,permissions
 from event.models import Division,Event,Company,Event_Form,Attendee
@@ -72,8 +73,19 @@ class ListForm(APIView):
      permission_classes = [permissions.AllowAny]
      
     
-    # def Checkcontact(request,contact)
-          #try:
+    
+     def checkemail(request,contact):
+        
+         User = get_user_model()
+         try:
+             return User.objects.get(email = contact.get('user'))
+         except User.DoesNotExist:
+             contactserializer = Form_ContactSerializer(data = contact)
+             if not contactserializer.is_valid():
+                return Response(contactserializer.errors, status=status.HTTP_400_BAD_REQUEST)
+             contactserializer.save()
+             user = User.objects.get(email = contact.get('user'))
+             return user
 
      def get_Form(request, pk):
          try:
@@ -85,38 +97,22 @@ class ListForm(APIView):
         form = Event_Form.objects.get(Creator = pk)
         serializer = Event_FormSerializer(form,many = True)
         return Response(serializer.data)  
+      
+    
+             
 
-     def post(self, request,pk):
-         print(pk)
-         if request.data["Form"].get('isComplete')== False:
-             serializer = FormSerializer(data = request.data["Form"])
-             if serializer.is_valid():
-                 serializer.save()
-                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-         else:
-             companySerializer = Form_CompanySerializer(data = request.data['company'])
-             contactSerializer = Form_ContactSerializer(data = request.data['contact'])
-             attendeeSerializer =Form_AttendeeSerializer(data = request.data['attendees'],many = True)
-             if not companySerializer.is_valid():
-                 return Response(companySerializer.errors, status=status.HTTP_400_BAD_REQUEST)
-             if not contactSerializer.is_valid():
-                 return Response(contactSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
-             if not attendeeSerializer.is_valid():
-                 return Response(attendeeSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
-         form = self.get_Form(pk)
-         serializer = FormSerializer(form, data=request.data['Form'])
-         if serializer.is_valid():
-             serializer.save()
-             companySerializer.save()
+     def post(self, request):
+             creator =  self.checkemail(request.data['contact'])
+             form = request.data['Form'].copy()
+             form['creator'] = creator.pk
+             formserializer =FormSerializer(data = form)
+             if not formserializer.is_valid():
+                 print(formserializer.errors)
+                 return Response(formserializer.errors, status=status.HTTP_400_BAD_REQUEST)
          
-             contactSerializer.save()
-             attendeeSerializer.save()
-             return Response(serializer.data,status=status.HTTP_201_CREATED)
-         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+             formserializer.save()
+             return Response(formserializer.data,status=status.HTTP_201_CREATED)
+        
       
 
 

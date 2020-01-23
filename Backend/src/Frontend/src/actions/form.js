@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_NO,POST_FORM, POST_DETAIL} from './types';
+import { GET_NO, POST_FORM} from './types';
 export const getnumber = (number) => dispatch=>
 {
      let persons = [];
@@ -13,7 +13,6 @@ export const getnumber = (number) => dispatch=>
         designation:"",
         email:"",
         phone:"",
-        form:"",
       }};
      persons.push(person);
        
@@ -27,30 +26,10 @@ export const getnumber = (number) => dispatch=>
     });
 }
 
-export const sendform = (Form,pk)  => dispatch =>
+export const sendform = (Form)  => dispatch =>
 { 
   
-        axios.post('/api/Form/'+pk+'/',Form).then(
-            res =>
-            {
-              dispatch({
-                  type: POST_DETAIL,
-                  payload:res.data
-              });
-              }).catch(err => console.log(err));
-
- 
- 
-
-    
-}
-
-export const postform = (Form)  => dispatch =>
-{ 
-    
- const form =  {Form};
-  console.log(Form);
-        axios.post('/api/Form/0/',form).then(
+        axios.post('/api/Form/',Form).then(
             res =>
             {
               dispatch({
@@ -61,6 +40,8 @@ export const postform = (Form)  => dispatch =>
 
  
  
+
     
 }
+
 

@@ -6,7 +6,6 @@ urlpatterns = [
     path('Divisions/', DivisionList.as_view()),
     path('Events/<int:division>/', EventList.as_view()),
     path('Form/', ListForm.as_view()),
-    path('Form/<int:pk>/', ListForm.as_view()),
     path('company/', ListCompany.as_view()),  
     path('attendee/', ListAttendee.as_view()),
    # path('contact/', ListContact.as_view()),

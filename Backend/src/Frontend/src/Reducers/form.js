@@ -1,4 +1,4 @@
-import {GET_NO,POST_FORM,POST_DETAIL,GET_FORMS} from '../actions/types.js';
+import {GET_NO,POST_FORM,GET_FORMS} from '../actions/types.js';
 
 
 const initialState = {
@@ -6,7 +6,7 @@ const initialState = {
     persons: [],
     Status:"" ,
     Form:"",
-    Forms:,
+    
 }
 
 export default function(state = initialState,action ){
@@ -22,13 +22,9 @@ export default function(state = initialState,action ){
           case POST_FORM:
           return {
             ...state,
-            FormID: action.payload
+            Form: action.payload
           }
-          case POST_DETAIL:
-            return {
-              ...state,
-              Form:action.payload
-            }
+      
             case GET_FORMS:
               return {
                 ...state,

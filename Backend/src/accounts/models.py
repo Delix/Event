@@ -1,31 +1,39 @@
 from django.db import models
-from event.models import Company,Event_Form
-
+from django.conf import settings
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager
 )
 
 
 class UserManager(BaseUserManager):
+    
     def create_user(self,email,password = None,is_active = True,is_staff = False,is_admin =False):
         if not email:
             raise ValueError('Users must have a email address')
-        if not password and user.staff == true:
+        if not password :
             raise ValueError('Users must have a password')
+
         user = self.model(
-            email = self.normalize_email(email)
+             email = self.normalize_email(email),
+             staff = is_staff,
+             admin = is_admin,
+             active = is_active
         )
-        user.staff = is_staff
-        user.admin = is_admin
-        user.active = is_active
-        if user.staff:
-           user.set_password(password)
-        else:
-           password = User.objects.make_random_password()
-           user.set_password(password)
+      
+     
+        user.set_password(password)
         user.save(using = self._db)
         return user
-    def create_staffuser(self,email,password = None,is_active = True,is_staff = True,is_admin =False):
+
+    def create_formuser(self,email): 
+       password = self.make_random_password()
+       print(password)
+       user = self.create_user(email = email,password= password,is_active = True,is_staff = False,is_admin = False)
+       return user
+    def create_staffuser(self,email,password = None):
+         user = self.create_user(email = email,password = password,is_active = True,is_staff = True,is_admin = False) 
+         return user
+    def create_staffuser(self,email,password = None):
          user = self.create_user(email = email,password = password,is_active = True,is_staff = True,is_admin = False) 
          return user
     def create_superuser(self,email,password = None):
@@ -70,9 +78,7 @@ class  Contact(models.Model):
       title = models.CharField(max_length = 4)
       name = models.CharField(max_length = 250)
       phone = models.CharField(max_length = 250)
-      email = models.EmailField(max_length=70)
-      user = models.OneToOneField(User,on_delete = models.CASCADE)
-      form = models.ForeignKey(Event_Form,on_delete = models.CASCADE,related_name = 'Form')
+      creator = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,primary_key = True)
   
       def __str__(self):
           return self.name  
